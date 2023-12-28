@@ -14,8 +14,11 @@
 #include <arpa/inet.h>
 #include <random>
 
+#include "project.cpp"
+
 #define PORT 8080
 #define USER_FILE "data/users.csv"
+#define PROJECT_FILE "data/project.csv"
 
 using json = nlohmann::json;
 using namespace std;
@@ -41,6 +44,7 @@ void handle_request(int client_socket, const string& request);
 string handle_login_request(const json& data);
 string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
+string handle_get_all_project(const json& data);
 
 void send_response(int client_socket, const string& response);
 
@@ -65,6 +69,11 @@ void register_routes() {
         string response = handle_logout_request(data);
         send_response(client_socket, response);
     };
+
+    router["project/all"] = [](int client_socket, const json& data) {
+        string response = handle_get_all_project(data);
+        send_response(client_socket, response);
+    };
 }
 
 void handle_request(int client_socket, const string& request) {
@@ -82,6 +91,10 @@ void handle_request(int client_socket, const string& request) {
     } else {
         send_response(client_socket, "Invalid JSON format");
     }
+}
+
+string handle_get_all_project(const json& data) {
+    string projects = getAllProjectById()
 }
 
 string handle_login_request(const json& data) {
