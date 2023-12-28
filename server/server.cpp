@@ -29,8 +29,10 @@ void handle_request(int client_socket, const string& request);
 string handle_login_request(const json& data);
 string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
+
 string handle_get_all_project(const json& data);
 string handle_create_project(const json& data);
+string handle_delete_project(const json& data);
 
 string handle_member_get_request(const json& data);
 string handle_member_add_request(const json& data);
@@ -67,6 +69,11 @@ void register_routes() {
 
     router["project/create"] = [](int client_socket, const json& data) {
         string response = handle_create_project(data);
+        send_response(client_socket, response);
+    };
+
+    router["project/delete"] = [](int client_socket, const json& data) {
+        string response = handle_delete_project(data);
         send_response(client_socket, response);
     };
 
@@ -129,6 +136,10 @@ string handle_create_project(const json& data) {
     string res = createProject(userId, name);
 
     return res;
+}
+
+string handle_delete_project(const json& data) {
+    
 }
 
 string handle_login_request(const json& data) {
