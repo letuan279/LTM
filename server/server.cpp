@@ -13,8 +13,10 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <random>
+#include "config.hpp"
 
 #include "project.cpp"
+#include "user.cpp"
 
 #define PORT 8080
 #define USER_FILE "data/users.csv"
@@ -46,6 +48,8 @@ string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
 string handle_get_all_project(const json& data);
 
+string handle_member_get_request(const json& data);
+
 void send_response(int client_socket, const string& response);
 
 // Router Define
@@ -72,6 +76,11 @@ void register_routes() {
 
     router["project/all"] = [](int client_socket, const json& data) {
         string response = handle_get_all_project(data);
+        send_response(client_socket, response);
+    };
+    
+    router["member/get"] = [](int client_socket, const json& data) {
+        string response = handle_member_get_request(data);
         send_response(client_socket, response);
     };
 }
@@ -257,6 +266,12 @@ string handle_logout_request(const json& data) {
     } else {
         return "User not found";
     }
+}
+
+string handle_member_get_request(const json& data) {
+    string session = data["session"];
+    string id_user = getIdUserBySession(session);
+    return id_user;
 }
 
 void send_response(int client_socket, const string& response) {
