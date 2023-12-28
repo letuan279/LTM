@@ -17,6 +17,7 @@
 
 #include "project.cpp"
 #include "user.cpp"
+#include "member.cpp"
 
 #define PORT 8080
 #define USER_FILE "data/users.csv"
@@ -49,6 +50,8 @@ string handle_logout_request(const json& data);
 string handle_get_all_project(const json& data);
 
 string handle_member_get_request(const json& data);
+string handle_member_add_request(const json& data);
+string handle_member_delete_request(const json& data);
 
 void send_response(int client_socket, const string& response);
 
@@ -81,6 +84,16 @@ void register_routes() {
     
     router["member/get"] = [](int client_socket, const json& data) {
         string response = handle_member_get_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["member/add"] = [](int client_socket, const json& data) {
+        string response = handle_member_add_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["member/delete"] = [](int client_socket, const json& data) {
+        string response = handle_member_delete_request(data);
         send_response(client_socket, response);
     };
 }
@@ -270,8 +283,153 @@ string handle_logout_request(const json& data) {
 
 string handle_member_get_request(const json& data) {
     string session = data["session"];
-    string id_user = getIdUserBySession(session);
-    return id_user;
+    string idProject = data["id_project"];
+    string idUser = getIdUserBySession(session);
+
+    if (idUser.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    vector<MemberData> members = getAllMembers(idProject);
+
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Successful";
+    responseData["data"] = json::array();
+
+    for (const MemberData& member : members) {
+        json memberData;
+        memberData["id"] = member.id;
+        memberData["username"] = member.username;
+        responseData["data"].push_back(memberData);
+    }
+
+    return responseData.dump();
+}
+
+string handle_member_add_request(const json& data) {
+    string session = data["session"];
+    string idUser = data["id_user"];
+    string idProject = data["id_project"];
+
+    string idUserRequest = getIdUserBySession(session);
+
+    if (idUserRequest.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    ifstream file(MEMBER_FILE);
+    string line;
+    vector<Member> members;
+
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string id, id_user, id_project;
+
+        if (getline(iss, id, ',') &&
+            getline(iss, id_user, ',') &&
+            getline(iss, id_project, ',')) {
+
+            members.push_back({ id, id_user, id_project });
+        }
+    }
+
+    file.close();
+
+    // Check if the member already exists
+    for (const auto& member : members) {
+        if (member.id_user == idUser && member.id_project == idProject) {
+            return R"({"success": 0,"message": "Member already exists","data": []})";
+        }
+    }
+
+    // Add the new member
+    std::ofstream outputFile(MEMBER_FILE, std::ios::app);
+    outputFile << generateRandomID() << "," << idUser << "," << idProject << std::endl;
+    outputFile.close();
+
+    vector<MemberData> membersData = getAllMembers(idProject);
+
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Member added successfully";
+    responseData["data"] = json::array();
+
+    for (const MemberData& member : membersData) {
+        json memberData;
+        memberData["id"] = member.id;
+        memberData["username"] = member.username;
+        responseData["data"].push_back(memberData);
+    }
+
+    return responseData.dump();
+}
+
+string handle_member_delete_request(const json& data) {
+    string session = data["session"];
+    string idUser = data["id_user"];
+    string idProject = data["id_project"];
+
+    string idUserRequest = getIdUserBySession(session);
+
+    if (idUserRequest.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    ifstream file(MEMBER_FILE);
+    string line;
+    vector<Member> members;
+
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string id, id_user, id_project;
+
+        if (getline(iss, id, ',') &&
+            getline(iss, id_user, ',') &&
+            getline(iss, id_project, ',')) {
+
+            members.push_back({ id, id_user, id_project });
+        }
+    }
+
+    file.close();
+
+    // Check if the member exists and delete it
+    bool memberFound = false;
+    for (auto it = members.begin(); it != members.end(); ++it) {
+        if (it->id_user == idUser && it->id_project == idProject) {
+            members.erase(it);
+            memberFound = true;
+            break;
+        }
+    }
+
+    if (!memberFound) {
+        return R"({"success": 0,"message": "Member not found","data": []})";
+    }
+
+    // Write the updated members list back to the file
+    ofstream outputFile(MEMBER_FILE);
+    for (const auto& member : members) {
+        outputFile << member.id << "," << member.id_user << "," << member.id_project << endl;
+    }
+    outputFile.close();
+
+    vector<MemberData> membersData = getAllMembers(idProject);
+
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Member deleted successfully";
+    responseData["data"] = json::array();
+
+    for (const MemberData& member : membersData) {
+        json memberData;
+        memberData["id"] = member.id;
+        memberData["username"] = member.username;
+        responseData["data"].push_back(memberData);
+    }
+
+    return responseData.dump();
 }
 
 void send_response(int client_socket, const string& response) {
