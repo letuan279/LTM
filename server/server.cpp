@@ -15,8 +15,13 @@
 #include <random>
 #include "config.hpp"
 
+#include "project.cpp"
 #include "user.cpp"
 #include "member.cpp"
+
+#define PORT 8080
+#define USER_FILE "data/users.csv"
+#define PROJECT_FILE "data/project.csv"
 
 using json = nlohmann::json;
 using namespace std;
@@ -42,6 +47,7 @@ void handle_request(int client_socket, const string& request);
 string handle_login_request(const json& data);
 string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
+string handle_get_all_project(const json& data);
 
 string handle_member_get_request(const json& data);
 string handle_member_add_request(const json& data);
@@ -71,6 +77,11 @@ void register_routes() {
         send_response(client_socket, response);
     };
 
+    router["project/all"] = [](int client_socket, const json& data) {
+        string response = handle_get_all_project(data);
+        send_response(client_socket, response);
+    };
+    
     router["member/get"] = [](int client_socket, const json& data) {
         string response = handle_member_get_request(data);
         send_response(client_socket, response);
@@ -102,6 +113,10 @@ void handle_request(int client_socket, const string& request) {
     } else {
         send_response(client_socket, "Invalid JSON format");
     }
+}
+
+string handle_get_all_project(const json& data) {
+    string projects = getAllProjectById()
 }
 
 string handle_login_request(const json& data) {

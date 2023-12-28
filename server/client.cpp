@@ -13,6 +13,7 @@ int main() {
     // std::string message = R"({"route": "member/add", "data": {"session": "LEnGx", "id_project": "2frwa", "id_user":"123ml"}})";
     std::string message = R"({"route": "member/delete", "data": {"session": "LEnGx", "id_project": "2frwa", "id_user":"123ml"}})";
     // std::string message = R"({"route": "login", "data": {"username": "tuan", "password": "1234"}})";
+    // std::string message = R"({"route": "project/all", "data": {"session":"asfaf2141"}})";
 
     char buffer[1024] = {0};
 
