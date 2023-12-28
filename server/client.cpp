@@ -9,7 +9,8 @@
 int main() {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    std::string message = R"({"route": "logout", "data": {"username": "tuan4", "password": "1234"}})";
+    std::string message = R"({"route": "member/get", "data": {"session": "LEnGx", "id_project": "1234"}})";
+    // std::string message = R"({"route": "login", "data": {"username": "tuan", "password": "1234"}})";
 
     char buffer[1024] = {0};
 
