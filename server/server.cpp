@@ -38,6 +38,8 @@ string handle_member_get_request(const json& data);
 string handle_member_add_request(const json& data);
 string handle_member_delete_request(const json& data);
 
+string handle_task_get_request(const json& data);
+
 void send_response(int client_socket, const string& response);
 
 // Router Define
@@ -91,6 +93,11 @@ void register_routes() {
         string response = handle_member_delete_request(data);
         send_response(client_socket, response);
     };
+
+    router["task/get"] = [](int client_socket, const json& data) {
+        string response = handle_task_get_request(data);
+        send_response(client_socket, response);
+    }
 }
 
 void handle_request(int client_socket, const string& request) {
@@ -453,6 +460,19 @@ string handle_member_delete_request(const json& data) {
     }
 
     return responseData.dump();
+}
+
+string handle_task_get_request(const json& data) {
+    string session = data["session"];
+    string idProject = data["id_project"];
+
+    string idUserRequest = getIdUserBySession(session);
+
+    if (idUserRequest.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    
 }
 
 void send_response(int client_socket, const string& response) {

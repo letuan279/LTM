@@ -2,3 +2,4 @@
 #define USER_FILE "data/users.csv"
 #define PROJECT_FILE "data/projects.csv"
 #define MEMBER_FILE "data/members.csv"
+#define TASK_FILE "data/tasks.csv"
