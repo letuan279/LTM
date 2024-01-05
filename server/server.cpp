@@ -14,32 +14,14 @@
 #include <arpa/inet.h>
 #include <random>
 #include "config.hpp"
+#include "utils.hpp"
 
 #include "project.cpp"
 #include "user.cpp"
 #include "member.cpp"
 
-#define PORT 8080
-#define USER_FILE "data/users.csv"
-#define PROJECT_FILE "data/project.csv"
-
 using json = nlohmann::json;
 using namespace std;
-
-// Utils
-string generateRandomID() {
-    string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    random_device rd;
-    mt19937 generator(rd());
-    uniform_int_distribution<int> distribution(0, characters.length() - 1);
-
-    string randomID;
-    for (int i = 0; i < 5; ++i) {
-        randomID += characters[distribution(generator)];
-    }
-
-    return randomID;
-}
 
 // Function Define 
 void handle_request(int client_socket, const string& request);
@@ -47,7 +29,10 @@ void handle_request(int client_socket, const string& request);
 string handle_login_request(const json& data);
 string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
+
 string handle_get_all_project(const json& data);
+string handle_create_project(const json& data);
+string handle_delete_project(const json& data);
 
 string handle_member_get_request(const json& data);
 string handle_member_add_request(const json& data);
@@ -83,7 +68,17 @@ void register_routes() {
         string response = handle_get_all_project(data);
         send_response(client_socket, response);
     };
-    
+
+    router["project/create"] = [](int client_socket, const json& data) {
+        string response = handle_create_project(data);
+        send_response(client_socket, response);
+    };
+
+    router["project/delete"] = [](int client_socket, const json& data) {
+        string response = handle_delete_project(data);
+        send_response(client_socket, response);
+    };
+
     router["member/get"] = [](int client_socket, const json& data) {
         string response = handle_member_get_request(data);
         send_response(client_socket, response);
@@ -113,6 +108,7 @@ void handle_request(int client_socket, const string& request) {
         json data = json_obj["data"];
 
         if (router.find(route) != router.end()) {
+            cout << "API: " << route << endl;
             router[route](client_socket, data);
         } else {
             send_response(client_socket, "Invalid route");
@@ -123,7 +119,34 @@ void handle_request(int client_socket, const string& request) {
 }
 
 string handle_get_all_project(const json& data) {
-    string projects = getAllProjectById()
+    json response;
+    string session = data["session"];
+    if (session.empty())
+        return init_response(false, "Session is not availble", "");
+
+    string userId = getIdUserBySession(session);
+    string projects = getAllProjectById(userId);
+
+    return projects;
+}
+
+string handle_create_project(const json& data) {
+    json response;
+    string session = data["session"];
+    string name = data["name"];
+    if (session.empty())
+        return init_response(false, "Session is not availble", "");
+    if (name.empty())
+        return init_response(false, "Project name can not be empty", "");
+
+    string userId = getIdUserBySession(session);
+    string res = createProject(userId, name);
+
+    return res;
+}
+
+string handle_delete_project(const json& data) {
+    
 }
 
 string handle_login_request(const json& data) {
