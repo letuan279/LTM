@@ -97,7 +97,7 @@ void register_routes() {
     router["task/get"] = [](int client_socket, const json& data) {
         string response = handle_task_get_request(data);
         send_response(client_socket, response);
-    }
+    };
 }
 
 void handle_request(int client_socket, const string& request) {
@@ -153,14 +153,17 @@ string handle_login_request(const json& data) {
     string username = data["username"];
     string password = data["password"];
 
-    // Perform login authentication logic
+    if (username.empty() || password.empty()) {
+        return init_response(false, string("Username and password cannot be empty"), "");
+    } 
+
     ifstream file(USER_FILE);
     if (!file) {
-        return "Failed to open " + string(USER_FILE);
+        return init_response(false, "[ERROR]: Failed to open " + string(USER_FILE), "");
     }
 
     string line;
-    vector<string> lines;  // To store all lines in memory
+    vector<string> lines;
 
     while (getline(file, line)) {
         stringstream ss(line);
@@ -171,7 +174,6 @@ string handle_login_request(const json& data) {
         getline(ss, session, ',');
 
         if (uname == username && pwd == password) {
-            // Login successful
             session = generateRandomID();
         }
 
@@ -180,10 +182,9 @@ string handle_login_request(const json& data) {
 
     file.close();
 
-    // Write the modified lines back to the file
     ofstream outFile(USER_FILE);
     if (!outFile) {
-        return "Failed to open " + string(USER_FILE) + " for writing";
+        return init_response(false, "[ERROR]: Failed to open " + string(USER_FILE) + " for writing", "");
     }
 
     for (const string& line : lines) {
@@ -192,7 +193,6 @@ string handle_login_request(const json& data) {
 
     outFile.close();
 
-    // Check if the login was successful based on the updated session field
     for (const string& line : lines) {
         stringstream ss(line);
         string id, uname, pwd, session;
@@ -202,31 +202,33 @@ string handle_login_request(const json& data) {
         getline(ss, session, ',');
 
         if (uname == username && pwd == password && !session.empty()) {
-            return "Login successful. Session ID: " + session;
+            json data = json::object();
+            data["id"] = id;
+            data["username"] = uname;
+            data["password"] = pwd;
+            data["session"] = session;
+            return init_response(true, "Login successfull", data.dump());
         }
     }
-
-    return "Login failed";
+  
+    return init_response(false, "[ERROR]: User not found!", "");
 }
 
 string handle_register_request(const json& data) {
     string username = data["username"];
     string password = data["password"];
 
-    // Kiểm tra username và password không rỗng
     if (username.empty() || password.empty()) {
-        return string("Username and password cannot be empty");
+        return init_response(false, "Username and password cannot be empty", "");
     }
 
-    // Đọc dữ liệu từ file users.csv
     ifstream file(USER_FILE);
     if (!file) {
-        return "Failed to open " + string(USER_FILE) ;
+        return init_response(false,"Failed to open " + string(USER_FILE), "");
     }
 
     string line;
     while (getline(file, line)) {
-        // Tách các trường dữ liệu trong dòng
         stringstream ss(line);
         string id, uname, pwd, session;
         getline(ss, id, ',');
@@ -234,30 +236,26 @@ string handle_register_request(const json& data) {
         getline(ss, pwd, ',');
         getline(ss, session, ',');
 
-        // Kiểm tra sự trùng lặp của username
         if (uname == username) {
-            return string("Username already exists");
+            return init_response(false, "Username already exists", "");
         }
     }
 
-    // Kiểm tra độ dài mật khẩu
     if (password.length() < 4) {
-        return string("Password length must be at least 4 characters");
+        return init_response(false, "Password length must be at least 4 characters", "");
     }
 
-    // Tạo ID mới
     string newID = generateRandomID();
 
-    // Ghi thông tin tài khoản mới vào file users.csv
     ofstream outfile(USER_FILE, ios::app);
     if (!outfile) {
-        return "Failed to open " + string(USER_FILE);
+        return init_response(false, "Failed to open " + string(USER_FILE), "");
     }
 
     outfile << newID << "," << username << "," << password << "," << endl;
     outfile.close();
 
-    return string("Registration successful");
+    return init_response(true, "Registration successful", "");
 }
 
 string handle_logout_request(const json& data) {
