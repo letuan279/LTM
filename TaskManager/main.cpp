@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     // Screen
     LoginScreen loginScreen;
     RegisterScreen registerScreen;
-    ProjectList projectListScreen;
 
     QObject::connect(&loginScreen, &LoginScreen::moveToRegisterClicked, [&]() {
         registerScreen.show();
@@ -73,7 +72,6 @@ int main(int argc, char *argv[])
                     acc.password = dataObj["password"].toString().toStdString();
                     acc.session = dataObj["session"].toString().toStdString();
                     loginScreen.hide();
-                    projectListScreen.show();
                     // QMessageBox::information(nullptr, "Success", message);
                 }
             }

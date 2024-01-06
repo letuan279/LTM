@@ -56,7 +56,7 @@
      <rect>
       <x>50</x>
       <y>200</y>
-      <width>271</width>
+      <width>281</width>
       <height>25</height>
      </rect>
     </property>
@@ -69,12 +69,12 @@
      <rect>
       <x>50</x>
       <y>230</y>
-      <width>271</width>
+      <width>281</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>move to login screen</string>
+     <string>Already have an account? Login instead </string>
     </property>
    </widget>
    <widget class="QLineEdit" name="input_register_username">

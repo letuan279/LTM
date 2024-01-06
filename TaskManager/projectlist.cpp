@@ -17,4 +17,3 @@ void ProjectList::on_testBtn_clicked()
 {
     qDebug() << "test";
 }
-

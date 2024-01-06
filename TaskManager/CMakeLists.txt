@@ -29,8 +29,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         loginscreen.h loginscreen.cpp loginscreen.ui
         registerscreen.h registerscreen.cpp registerscreen.ui
         call.h
-        projectlist.h projectlist.cpp projectlist.ui
+
         memberscreen.h memberscreen.cpp memberscreen.ui
+        projectlistscreen.h projectlistscreen.cpp projectlistscreen.ui
+        taskscreen.h taskscreen.cpp taskscreen.ui
+        chatscreen.h chatscreen.cpp chatscreen.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET TaskManager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
