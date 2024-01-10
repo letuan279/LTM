@@ -72,6 +72,12 @@ string performRegister(const string& username, const string& password) {
     return res;
 }
 
+string performLogout(const string& session) {
+    string message = R"({"route": "logout", "data": {"session": ")" + session + "\"}}";
+    string res = call(message);
+    return res;
+}
+
 string performGetUserById(const string& id)
 {
     string message = R"({"route": "user", "data": {"id": ")" + id + "\"}}";

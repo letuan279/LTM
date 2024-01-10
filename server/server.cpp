@@ -228,6 +228,10 @@ string handle_login_request(const json& data) {
         getline(ss, session, ',');
 
         if (uname == username && pwd == password) {
+            if(session != "") {
+                return init_response(false, "[ERROR]: User already logined", "");
+            }
+
             session = generateRandomID();
         }
 
@@ -313,41 +317,36 @@ string handle_register_request(const json& data) {
 }
 
 string handle_logout_request(const json& data) {
-    string username = data["username"];
-
-    // Remove the session for the user in the file
+    string session = data["session"];
     ifstream file(USER_FILE);
     if (!file) {
-        return "Failed to open " + string(USER_FILE);
+        return init_response(false, "Failed to open " + string(USER_FILE), "");
     }
 
     string line;
-    vector<string> lines;  // To store all lines in memory
+    vector<string> lines;
     bool sessionRemoved = false;
 
     while (getline(file, line)) {
         stringstream ss(line);
-        string id, uname, pwd, session;
+        string id, uname, pwd, sessionFile;
         getline(ss, id, ',');
         getline(ss, uname, ',');
         getline(ss, pwd, ',');
-        getline(ss, session, ',');
+        getline(ss, sessionFile, ',');
 
-        if (uname == username) {
-            // Remove the session for the user
-            session = "";
+        if (sessionFile == session) {
+            sessionFile = "";
             sessionRemoved = true;
         }
 
-        lines.push_back(id + "," + uname + "," + pwd + "," + session);
+        lines.push_back(id + "," + uname + "," + pwd + "," + sessionFile);
     }
 
     file.close();
-
-    // Write the modified lines back to the file
     ofstream outFile(USER_FILE);
     if (!outFile) {
-        return "Failed to open " + string(USER_FILE) + " for writing";
+        return init_response(false, "Failed to open " + string(USER_FILE) + " for writing", "");
     }
 
     for (const string& line : lines) {
@@ -357,9 +356,9 @@ string handle_logout_request(const json& data) {
     outFile.close();
 
     if (sessionRemoved) {
-        return "Logout successful";
+        return init_response(true, "Logout successful", "");
     } else {
-        return "User not found";
+        return init_response(false, "User not found", "");
     }
 }
 

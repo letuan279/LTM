@@ -203,6 +203,27 @@ int main(int argc, char *argv[])
         }
     });
 
+    QObject::connect(&projectListScreen, &ProjectListScreen::logout, [&]() {
+        string res = performLogout(acc.session);
+
+        QString jsonString = QString::fromStdString(res);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        if (!jsonDoc.isNull()) {
+            if (jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+                if(!success){
+                    QMessageBox::critical(nullptr, "Error", message);
+                } else {
+                    projectListScreen.hide();
+                    loginScreen.show();
+                    QMessageBox::information(nullptr, "Success", message);
+                }
+            }
+        }
+    });
+
     QPushButton *chatBtn = projectDetailsScreen.findChild<QPushButton*>("chat_btn"); // 0
     QPushButton *memberBtn = projectDetailsScreen.findChild<QPushButton*>("member_btn"); // 1
     QPushButton *taskBtn = projectDetailsScreen.findChild<QPushButton*>("task_btn"); // 2
