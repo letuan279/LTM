@@ -76,7 +76,7 @@ string getCurrentDate() {
 
 template<typename T>
 bool findInVector(const vector<T>& vec, T& key) {
-    auto it = std::find(vec.begin(), vec.end(), key);
+    auto it = find(vec.begin(), vec.end(), key);
 
     if (it != vec.end()) {
         return true;
@@ -93,4 +93,34 @@ string getCurrentTime() {
     ss << put_time(localtime(&currentTime), "%Y-%m-%d %H:%M:%S");
     
     return ss.str();
+}
+
+bool compareDates(const string& date1, const string& date2) {
+    int year1 = stoi(date1.substr(0, 4));
+    int month1 = stoi(date1.substr(5, 2));
+    int day1 = stoi(date1.substr(8, 2));
+
+    int year2 = stoi(date2.substr(0, 4));
+    int month2 = stoi(date2.substr(5, 2));
+    int day2 = stoi(date2.substr(8, 2));
+
+    if (year1 < year2) {
+        return true;
+    } else if (year1 > year2) {
+        return false;
+    }
+
+    if (month1 < month2) {
+        return true;
+    } else if (month1 > month2) {
+        return false;
+    }
+
+    if (day1 < day2) {
+        return true;
+    } else if (day1 > day2) {
+        return false;
+    }
+
+    return true;
 }

@@ -163,3 +163,56 @@ string getUserToAddMember(const string& id_user, const string& id_project) {
 
     return response.dump();
 }
+
+string getUserToAddTask(const string& id_user, const string& id_project) {
+    vector<UserData> users;
+    ifstream usersFile(USER_FILE);
+    if (usersFile.is_open()) {
+        string line;
+        getline(usersFile, line);
+        while (getline(usersFile, line)) {
+            stringstream ss(line);
+            string id, username, password, session;
+            getline(ss, id, ',');
+            getline(ss, username, ',');
+            getline(ss, password, ',');
+            getline(ss, session, ',');
+            users.push_back({id, username});
+        }
+        usersFile.close();
+    }
+
+    unordered_set<string> projectMembers;
+    ifstream membersFile(MEMBER_FILE);
+    if (membersFile.is_open()) {
+        string line;
+        getline(membersFile, line);
+        while (getline(membersFile, line)) {
+            stringstream ss(line);
+            string id, id_user, id_projectFile;
+            getline(ss, id, ',');
+            getline(ss, id_user, ',');
+            getline(ss, id_projectFile, ',');
+            if (id_projectFile == id_project) {
+                projectMembers.insert(id_user);
+            }
+        }
+        membersFile.close();
+    }
+
+    json response;
+    response["success"] = 1;
+    response["message"] = "OK";
+    response["data"] = json::array();
+
+    for (const UserData& user : users) {
+        if(user.id != id_user && projectMembers.find(user.id) != projectMembers.end()) {
+            json userData;
+            userData["id"] = user.id;
+            userData["username"] = user.username;
+            response["data"].push_back(userData);
+        }
+    }
+
+    return response.dump();
+}

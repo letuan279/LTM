@@ -319,6 +319,9 @@ int main(int argc, char *argv[])
                     acc.username = dataObj["username"].toString().toStdString();
                     acc.password = dataObj["password"].toString().toStdString();
                     acc.session = dataObj["session"].toString().toStdString();
+
+                    QLabel *usernameHead = projectListScreen.findChild<QLabel*>("username_head");
+                    usernameHead->setText(QString::fromStdString(acc.username));
                     loginScreen.hide();
                     projectListScreen.show();
                     // QMessageBox::information(nullptr, "Success", message);
@@ -407,6 +410,8 @@ int main(int argc, char *argv[])
         qDebug() << "Change to Task Widget";
     });
 
+    // Add member
+
     QJsonArray allMembers;
     QObject::connect(addMemberBtn, &QPushButton::clicked, [&]() {
         memberFormPopup.show();
@@ -437,7 +442,6 @@ int main(int argc, char *argv[])
         }
     });
 
-
     QObject::connect(&memberFormPopup, &MemberForm::handleAccept, [&]() {
         QComboBox *combobox = memberFormPopup.findChild<QComboBox*>("input_list_member");
         int index = combobox->currentIndex();
@@ -464,6 +468,63 @@ int main(int argc, char *argv[])
 
     QObject::connect(&memberFormPopup, &MemberForm::handleReject, [&]() {
         memberFormPopup.hide();
+    });
+
+    // Add task
+    QJsonArray allAssign;
+    QObject::connect(addTaskBtn, &QPushButton::clicked, [&]() {
+        taskCreateFormPopup.show();
+        QComboBox *assignCombobox = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2");
+        assignCombobox->clear();
+        assignCombobox->clearEditText();
+
+        std::string user_res = performGetUserToAddTask(acc.session, currProject.id);
+        QString jsonString = QString::fromStdString(user_res);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+            QJsonObject jsonObj = jsonDoc.object();
+            int success = jsonObj["success"].toInt();
+            QString message = jsonObj["message"].toString();
+            if (!success) {
+                notify(success, message.toStdString());
+            } else {
+                QJsonArray userArr = jsonObj["data"].toArray();
+                qDebug() << "Total: " << userArr.size();
+                assignCombobox->addItem("");
+                for (int i = 0; i < userArr.size(); i++) {
+                    QJsonObject user = userArr[i].toObject();
+                    allAssign.insert(i+1, user);
+                    assignCombobox->addItem(user["username"].toString());
+                }
+            }
+        }
+    });
+
+    QObject::connect(&taskCreateFormPopup, &TaskForm::handleAccept, [&](const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign) {
+        QComboBox *combobox = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2");
+        int index = combobox->currentIndex();
+        if (!allAssign[index].isNull() && allAssign[index].isObject()) {
+            QJsonObject assign = allAssign[index].toObject();
+            std::string create_res = performAddTask(acc.session, currProject.id, name, status, start_date, end_date, comment, assign["id"].toString().toStdString());
+            QString jsonString = QString::fromStdString(create_res);
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+
+                notify(success, message.toStdString());
+
+                if (success) {
+                    getTaskList(taskWidget);
+                    taskCreateFormPopup.hide();
+                }
+            }
+        }
+    });
+
+    QObject::connect(&taskCreateFormPopup, &TaskForm::handleReject, [&]() {
+        taskCreateFormPopup.hide();
     });
 
     QPushButton *createProjectBtn = projectListScreen.findChild<QPushButton*>("create_project_btn");

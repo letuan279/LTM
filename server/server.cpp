@@ -13,6 +13,8 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <random>
+#include <sstream>
+#include <iomanip>
 
 #include "config.hpp"
 #include "utils.hpp"
@@ -38,6 +40,7 @@ string handle_logout_request(const json& data);
 string handle_get_user_by_id(const json&data);
 string handle_get_all_users(const json&data);
 string handle_get_user_to_add_member(const json&data);
+string handle_get_user_to_add_task(const json&data);
 
 string handle_get_all_project(const json& data);
 string handle_create_project(const json& data);
@@ -91,6 +94,11 @@ void register_routes() {
 
     router["user/get-to-add-member"] = [](int client_socket, const json& data) {
         string response = handle_get_user_to_add_member(data);
+        send_response(client_socket, response);
+    };
+
+    router["user/get-to-add-task"] = [](int client_socket, const json& data) {
+        string response = handle_get_user_to_add_task(data);
         send_response(client_socket, response);
     };
 
@@ -427,6 +435,18 @@ string handle_get_user_to_add_member(const json& data) {
     return getUserToAddMember(idUser, idProject);
 }
 
+string handle_get_user_to_add_task(const json& data) {
+    string session = data["session"];
+    string idProject = data["id_project"];
+    string idUser = getIdUserBySession(session);
+
+    if (idUser.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    return getUserToAddTask(idUser, idProject);
+}
+
 string handle_member_get_request(const json& data) {
     string session = data["session"];
     string idProject = data["id_project"];
@@ -463,6 +483,8 @@ string handle_member_add_request(const json& data) {
     if (idUserRequest.empty()) {
         return R"({"success": 0,"message": "User not found","data": []})";
     }
+
+    if (!isOwnerProject(idUser, idProject)) return init_response(false, "Permission denied", "");
 
     ifstream file(MEMBER_FILE);
     string line;
@@ -597,20 +619,28 @@ string handle_task_create_request(const json& data) {
     string status = data["status"];
     string start_date = data["start_date"];
     string end_date = data["end_date"];
+    string comment = data["comment"];
+    string id_assign = data["id_assign"];
 
     if (session.empty()) return init_response(false, "Field session must not be empty", "");
     if (id_project.empty()) return init_response(false, "Field id_project must not be empty", "");
     if (name.empty()) return init_response(false, "Field name must not be empty", "");
     if (status.empty()) status = "TODO";
-    if (start_date.empty()) start_date = getCurrentDate();
+    if (start_date.empty()) return init_response(false, "Field start_date must not be empty", "");
     if (end_date.empty()) return init_response(false, "Field end_date must not be empty", "");
+    if (comment.empty()) comment = "";
+    if (id_assign.empty()) id_assign = "";
+
+    if(!compareDates(start_date, end_date)) {
+        return init_response(false, "start_date must be earlier than end_date", "");
+    }
 
     string id_user = getIdUserBySession(session);
 
-    if (id_user.empty()) init_response(false, "User not found", "");
-    if (!isOwnerProject(id_user, id_project)) init_response(false, "Permission denied", "");
+    if (id_user.empty()) return init_response(false, "User not found", "");
+    if (!isOwnerProject(id_user, id_project)) return init_response(false, "Permission denied", "");
 
-    return createNewTask(id_user, id_project, name, status, start_date, end_date);
+    return createNewTask(id_user, id_project, name, status, id_assign, comment, start_date, end_date);
 }
 
 string handle_task_assign_request(const json& data) {
@@ -731,8 +761,8 @@ int main() {
         if (fork() == 0) {
             close(server_fd);
             handle_client(new_socket);
-        exit(0);
-}
+            exit(0);
+        }
         close(new_socket);
     }
     

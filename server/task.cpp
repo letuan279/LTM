@@ -55,7 +55,7 @@ string getAllTasksByProjectID(const string& projectID) {
     return init_response(true, "Get tasks successed", data);
 }
 
-string createNewTask(const string id_user, const string id_project, const string name, const string status, const string start_date, const string end_date) {
+string createNewTask(const string id_user, const string id_project, const string name, const string status, const string id_assign, const string comment, const string start_date, const string end_date) {
     string newTaskId = generateRandomID();
 
     ofstream taskFile(TASK_FILE, ios::app);
@@ -64,7 +64,7 @@ string createNewTask(const string id_user, const string id_project, const string
     }
 
     // id,id_project,name,status,id_assign,comment,start_date,end_date
-    taskFile << newTaskId << "," << id_project << "," << id_user << "," << name << "," << status << ",,," << start_date << "," << end_date << endl;
+    taskFile << newTaskId << "," << id_project << "," << id_user << "," << name << "," << status << "," << id_assign << "," << comment << "," << start_date << "," << end_date << endl;
     taskFile.close();
 
     return init_response(true, "Created task with id: " + newTaskId, "");

@@ -92,6 +92,13 @@ string performGetAllUser(const string& session, const string& id_project)
     return res;
 }
 
+string performGetUserToAddTask(const string& session, const string& id_project)
+{
+    string message = R"({"route": "user/get-to-add-task", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
+    string res = call(message);
+    return res;
+}
+
 string performGetProjectList(const string& session)
 {
     string message = R"({"route": "project/all", "data": {"session": ")" + session + "\"}}";
@@ -116,6 +123,21 @@ string performGetMemberList(const string& session, const string& id_project)
 string performAddMember(const string& session, const string& id_project, const string& id_user)
 {
     string message = R"({"route": "member/add", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + R"(", "id_user": ")" + id_user + "\"}}";
+    string res = call(message);
+    return res;
+}
+
+string performAddTask(const string& session, const string& id_project, const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign)
+{
+    string message = R"({"route": "task/create", "data": {"session": ")" + session +
+                     R"(", "id_project": ")" + id_project +
+                     R"(", "name": ")" + name +
+                     R"(", "status": ")" + status +
+                     R"(", "start_date": ")" + start_date +
+                     R"(", "end_date": ")" + end_date +
+                     R"(", "comment": ")" + comment +
+                     R"(", "id_assign": ")" + id_assign + R"("}})";
+
     string res = call(message);
     return res;
 }
