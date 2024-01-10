@@ -18,7 +18,6 @@ public:
 signals:
     void moveToLoginClicked();
     void registerButtonClicked(const QString& username, const QString& password);
-
 private slots:
     void on_moveto_login_clicked();
     void on_btn_register_clicked();

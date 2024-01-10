@@ -1,14 +1,27 @@
 #include "projectlistscreen.h"
 #include "ui_projectlistscreen.h"
 
-projectlistscreen::projectlistscreen(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::projectlistscreen)
+ProjectListScreen::ProjectListScreen(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ProjectListScreen)
 {
     ui->setupUi(this);
 }
 
-projectlistscreen::~projectlistscreen()
+ProjectListScreen::~ProjectListScreen()
 {
     delete ui;
 }
+
+void ProjectListScreen::showEvent(QShowEvent *event) {
+    QWidget::show();
+
+    emit widgetShown();
+}
+
+void ProjectListScreen::on_project_list_doubleClicked(const QModelIndex &index)
+{
+    QString id = index.model()->data(index.model()->index(index.row(), 0)).toString();
+    emit doubleClick(id);
+}
+

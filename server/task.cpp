@@ -36,7 +36,7 @@ string getAllTasksByProjectID(const string& projectID) {
             getline(iss, end_date, ',')) {
 
             if (id_project == projectID) {
-                tasks.push_back("{\"id\":\"" + id + "\",\"id_project\":\"" + id_project + "\",\"name\":\"" + name + "\",\"status\":\"" + status + "\",\"id_assign\":\"" + id_assign + "\",\"comment\":\"" + comment + "\",\"start_date\":\"" + start_date + "\",\"end_date\":\"" + end_date + "\"}");
+                tasks.push_back("{\"id\":\"" + id + "\",\"id_project\":\"" + id_project + "\",\"id_manager\":\"" + id_manager + "\",\"name\":\"" + name + "\",\"status\":\"" + status + "\",\"id_assign\":\"" + id_assign + "\",\"comment\":\"" + comment + "\",\"start_date\":\"" + start_date + "\",\"end_date\":\"" + end_date + "\"}");
             }
         }
     }
