@@ -39,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         projectdetails.h projectdetails.cpp projectdetails.ui
         projectform.h projectform.cpp projectform.ui
         taskform.h taskform.cpp taskform.ui
+        memberform.h memberform.cpp memberform.ui
 
     )
 # Define target properties for Android with Qt 6 as:

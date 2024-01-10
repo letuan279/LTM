@@ -19,6 +19,7 @@
 #include "projectdetails.h"
 #include "projectform.h"
 #include "memberform.h"
+#include "taskform.h"
 
 #include "call.h"
 
@@ -243,6 +244,7 @@ void getTaskList(const QWidget* screen) {
             }
         }
     }
+}
 
 string parseMessages(const string& res)
 {
@@ -285,6 +287,7 @@ int main(int argc, char *argv[])
     ProjectDetails projectDetailsScreen;
     ProjectForm projectFormPopup;
     MemberForm memberFormPopup;
+    TaskForm taskCreateFormPopup;
 
     QObject::connect(&loginScreen, &LoginScreen::moveToRegisterClicked, [&]() {
         registerScreen.show();
@@ -412,7 +415,7 @@ int main(int argc, char *argv[])
         memberCombobox->clearEditText();
 
         qDebug() << "Get all user";
-        std::string user_res = performGetAllUser(acc.session);
+        std::string user_res = performGetAllUser(acc.session, currProject.id);
         QString jsonString = QString::fromStdString(user_res);
         QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
         if (!jsonDoc.isNull() && jsonDoc.isObject()) {
@@ -428,7 +431,7 @@ int main(int argc, char *argv[])
                     QJsonObject user = userArr[i].toObject();
                     qDebug() << "Adding " << user["username"].toString().toStdString();
                     allMembers.insert(i, user);
-                    memberCombobox->setItemData(i, user["username"].toString());
+                    memberCombobox->addItem(user["username"].toString());
                 }
             }
         }

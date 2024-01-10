@@ -85,9 +85,9 @@ string performGetUserById(const string& id)
     return res;
 }
 
-string performGetAllUser(const string& session)
+string performGetAllUser(const string& session, const string& id_project)
 {
-    string message = R"({"route": "user/all", "data": {"session": ")" + session + "\"}}";
+    string message = R"({"route": "user/get-to-add-member", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
     string res = call(message);
     return res;
 }
