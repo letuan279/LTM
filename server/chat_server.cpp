@@ -72,13 +72,16 @@ int main()
             exit(-1);
         }
 
-        char initialMessage[MAX_LEN];
-        int bytes_received = recv(client_socket, initialMessage, sizeof(initialMessage), 0);
-        if (bytes_received <= 0)
+        char buffer[1024];
+        ssize_t receivedBytes = recv(client_socket, buffer, 1024 - 1, 0);
+        if (receivedBytes == -1) {
             continue;
+        }
 
+        buffer[receivedBytes] = '\0';
+
+        string initialMessageStr(buffer);
         string id_user, id_project;
-        string initialMessageStr(initialMessage);
         size_t separatorPos = initialMessageStr.find('|');
         if (separatorPos != string::npos) {
             id_user = initialMessageStr.substr(0, separatorPos);
@@ -108,8 +111,9 @@ int broadcast_message(string message, int client_socket, string id_user, string 
 {
     char temp[MAX_LEN];
     strcpy(temp, message.c_str());
+    string time = getCurrentTime();
 
-    cout << message << endl;
+    addMessage(id_project, id_user, message, time);
 
     lock_guard<mutex> guard(chatMembersMutex);
     for (int i = 0; i < chatMembers.size(); i++)
@@ -117,7 +121,7 @@ int broadcast_message(string message, int client_socket, string id_user, string 
         if (chatMembers[i].socket != client_socket && chatMembers[i].id_project == id_project)
         {
             string username = getUsernameUserById(id_user);
-            string sendStr = chatMembers[i].id_user + "|" + username + "|" + id_project + "|" + temp;
+            string sendStr = username + "|" + time + "|" + temp;
             const char* sendPtr = sendStr.c_str();
             size_t sendLen = strlen(sendPtr);
             send(chatMembers[i].socket, sendPtr, sendLen, 0);
@@ -143,18 +147,23 @@ void end_connection(string id_user)
 
 void handle_client(int client_socket, string id_user, string id_project)
 {
-    char str[MAX_LEN];
     while (1)
     {
-        int bytes_received = recv(client_socket, str, sizeof(str), 0);
-        if (bytes_received <= 0)
-            break;
-        if (strcmp(str, "#exit") == 0)
+        char buffer[1024];
+        ssize_t receivedBytes = recv(client_socket, buffer, 1024 - 1, 0);
+        if (receivedBytes == -1) {
+            break;;
+        }
+
+        buffer[receivedBytes] = '\0';
+        string str(buffer);
+
+        if (strcmp(str.c_str(), "#exit") == 0)
         {
             end_connection(id_user);
             return;
         }
-        broadcast_message(string(str), client_socket, id_user, id_project);
+        broadcast_message(str, client_socket, id_user, id_project);
     }
 
     end_connection(id_user);
