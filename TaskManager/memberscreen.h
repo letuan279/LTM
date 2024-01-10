@@ -15,6 +15,9 @@ public:
     explicit MemberScreen(QWidget *parent = nullptr);
     ~MemberScreen();
 
+private slots:
+    void on_send_message_btn_clicked();
+
 private:
     Ui::MemberScreen *ui;
 };

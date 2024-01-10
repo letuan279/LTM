@@ -13,12 +13,14 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <random>
+
 #include "config.hpp"
 #include "utils.hpp"
 
 #include "project.cpp"
 #include "user.cpp"
 #include "member.cpp"
+#include "message.cpp"
 
 using json = nlohmann::json;
 using namespace std;
@@ -39,6 +41,8 @@ string handle_member_add_request(const json& data);
 string handle_member_delete_request(const json& data);
 
 string handle_task_get_request(const json& data);
+
+string handle_chat_get_start(int client_socket, const json& data);
 
 void send_response(int client_socket, const string& response);
 
@@ -98,6 +102,17 @@ void register_routes() {
         string response = handle_task_get_request(data);
         send_response(client_socket, response);
     };
+
+    router["chat/get"] = [](int client_socket, const json& data) {
+        string response = handle_chat_get_start(client_socket, data);
+        send_response(client_socket, response);
+    };
+
+    // router["chat/test"] = [](int client_socket, const json& data) {
+    //     lock_guard<mutex> lock(chatMembersMutex);
+    //     string response = to_string(chatMembers.size());
+    //     send_response(client_socket, response);
+    // };
 }
 
 void handle_request(int client_socket, const string& request) {
@@ -125,7 +140,10 @@ string handle_get_all_project(const json& data) {
         return init_response(false, "Session is not availble", "");
 
     string userId = getIdUserBySession(session);
+    cout << "USERID:::" << userId << endl;
+
     string projects = getAllProjectById(userId);
+    cout << "projects:::" << projects << endl;
 
     return projects;
 }
@@ -473,6 +491,21 @@ string handle_task_get_request(const json& data) {
     
 }
 
+string handle_chat_get_start(int client_socket, const json& data) {
+    string session = data["session"];
+    string idProject = data["id_project"];
+
+    string idUser = getIdUserBySession(session);
+    if (idUser.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    // send all old message in project to client
+    string messages = getAllMessagesByProjectId(idProject);
+
+    return init_response(true, "Get message", messages);
+}
+
 void send_response(int client_socket, const string& response) {
     send(client_socket, response.c_str(), response.length(), 0);
 }
@@ -517,10 +550,10 @@ int main() {
         if (fork() == 0) {
             close(server_fd);
             handle_client(new_socket);
-            exit(0);
-        }
+        exit(0);
+}
         close(new_socket);
     }
-
-    return 0;
+    
+        return 0;
 }

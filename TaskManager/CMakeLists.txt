@@ -31,6 +31,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         call.h
         projectlist.h projectlist.cpp projectlist.ui
         memberscreen.h memberscreen.cpp memberscreen.ui
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET TaskManager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

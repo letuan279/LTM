@@ -1,14 +1,10 @@
-#ifndef CALL_H
-#define CALL_H
-
-#endif // CALL_H
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include "call.h"
 
 using namespace std;
 
