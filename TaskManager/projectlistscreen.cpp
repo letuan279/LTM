@@ -25,3 +25,9 @@ void ProjectListScreen::on_project_list_doubleClicked(const QModelIndex &index)
     emit doubleClick(id);
 }
 
+
+void ProjectListScreen::on_logout_btn_clicked()
+{
+    emit logout();
+}
+

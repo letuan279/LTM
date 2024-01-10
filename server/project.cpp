@@ -3,41 +3,41 @@
 
 using namespace std;
 
-string getAllProjectById(const string _id) {
-    if (_id.empty()) {
-        return init_response(false, "[ERROR] User not found", "");
-    }
+// string getAllProjectById(const string _id) {
+//     if (_id.empty()) {
+//         return init_response(false, "[ERROR] User not found", "");
+//     }
 
-    ifstream prj_file(PROJECT_FILE);
-    if (!prj_file) {
-        return init_response(false, "[ERROR] Failed to open " + string(PROJECT_FILE), "");
-    }
+//     ifstream mem_file(MEMBER_FILE);
+//     if (!mem_file) {
+//         return init_response(false, "[ERROR] Failed to open " + string(MEMBER_FILE), "");
+//     }
 
-    string line;
-    vector<string> lines;
+//     string line;
+//     vector<string> lines;
 
-    while (getline(prj_file, line)) {
-        stringstream ss(line);
-        string id, name, id_owner;
-        getline(ss, id, ',');
-        getline(ss, name, ',');
-        getline(ss, id_owner, ',');
+//     while (getline(mem_file, line)) {
+//         stringstream ss(line);
+//         string id, id_user, id_project;
+//         getline(ss, id, ',');
+//         getline(ss, id_user, ',');
+//         getline(ss, id_project, ',');
 
-        if (_id == id_owner)
-            lines.push_back("{\"id\":\"" + id + "\",\"name\":\"" + name + "\",\"id_owner\":\"" + id_owner + "\"}");
-    }
+//         if (_id == id_user)
+//             lines.push_back("{\"id\":\"" + id + "\",\"name\":\"" + name + "\",\"id_owner\":\"" + id_owner + "\"}");
+//     }
 
-    prj_file.close();
+//     mem_file.close();
 
-    string data = "[";
-    for (const string& line : lines) {
-        data += line + ",";
-    }
-    data.pop_back();
-    data += "]";
+//     string data = "[";
+//     for (const string& line : lines) {
+//         data += line + ",";
+//     }
+//     if(data[data.length() - 1] == ',') data.pop_back();
+//     data += "]";
 
-    return init_response(true, "Successful", data);
-}
+//     return init_response(true, "Successful", data);
+// }
 
 string findProjectById(const string _id) {
     if (_id.empty()) {
@@ -136,3 +136,54 @@ string createProject(const string user_id, const string name) {
 
 //     return init_response(true, "Delete project - id: " + newID, "");
 // }
+
+struct Project {
+    string id;
+    string name;
+    string ownerId;
+};
+
+vector<Project> getProjectsByUserId(const string& userId) {
+    unordered_map<string, string> projectOwners;
+    vector<Project> projects;
+    
+    ifstream membersFile(MEMBER_FILE);
+    string membersLine;
+    
+    while (getline(membersFile, membersLine)) {
+        istringstream membersIss(membersLine);
+        string memberId, memberUserId, projectId;
+        
+        if (getline(membersIss, memberId, ',') &&
+            getline(membersIss, memberUserId, ',') &&
+            getline(membersIss, projectId, ',')) {
+            
+            if (memberUserId == userId) {
+                projectOwners[projectId] = memberUserId;
+            }
+        }
+    }
+    
+    ifstream projectsFile(PROJECT_FILE);
+    string projectsLine;
+    
+    while (getline(projectsFile, projectsLine)) {
+        istringstream projectsIss(projectsLine);
+        string projectId, projectName, ownerId;
+        
+        if (getline(projectsIss, projectId, ',') &&
+            getline(projectsIss, projectName, ',') &&
+            getline(projectsIss, ownerId, ',')) {
+            
+            if (projectOwners.find(projectId) != projectOwners.end()) {
+                Project project;
+                project.id = projectId;
+                project.name = projectName;
+                project.ownerId = ownerId;
+                projects.push_back(project);
+            }
+        }
+    }
+    
+    return projects;
+}

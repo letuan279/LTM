@@ -18,12 +18,15 @@ public:
 signals:
     void widgetShown();
     void doubleClick(const QString& id);
+    void logout();
 
 protected:
     void showEvent(QShowEvent *event) override;
 
 private slots:
     void on_project_list_doubleClicked(const QModelIndex &index);
+
+    void on_logout_btn_clicked();
 
 private:
     Ui::ProjectListScreen *ui;

@@ -13,18 +13,22 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <random>
+
 #include "config.hpp"
 #include "utils.hpp"
 
 #include "project.cpp"
 #include "user.cpp"
 #include "member.cpp"
+#include "message.cpp"
 #include "task.cpp"
 
 using json = nlohmann::json;
 using namespace std;
 
 // Function Define 
+void logFile(string content);
+
 void handle_request(int client_socket, const string& request);
 
 string handle_login_request(const json& data);
@@ -47,6 +51,8 @@ string handle_task_create_request(const json& data);
 string handle_task_assign_request(const json& data);
 string handle_task_update_status_request(const json& data);
 string handle_task_add_comment_request(const json& data);
+
+string handle_chat_get_start(int client_socket, const json& data);
 
 void send_response(int client_socket, const string& response);
 
@@ -117,6 +123,11 @@ void register_routes() {
         send_response(client_socket, response);
     };
 
+    router["chat/get"] = [](int client_socket, const json& data) {
+        string response = handle_chat_get_start(client_socket, data);
+        send_response(client_socket, response);
+    };
+    
     router["task/create"] = [](int client_socket, const json& data) {
         string response = handle_task_create_request(data);
         send_response(client_socket, response);
@@ -138,6 +149,16 @@ void register_routes() {
     };
 }
 
+void logFile(string content) {
+    ofstream file(LOG_FILE, ios::app);
+    if (file.is_open()) {
+        file << content << endl;
+        file.close();
+    } else {
+        cout << "Failed to open the file." << endl;
+    }
+}
+
 void handle_request(int client_socket, const string& request) {
     json json_obj = json::parse(request);
 
@@ -147,6 +168,12 @@ void handle_request(int client_socket, const string& request) {
 
         if (router.find(route) != router.end()) {
             cout << "API: " << route << endl;
+            
+            // Store log
+            stringstream ss;
+            ss << "[" << getCurrentTime() << "]" << "[CLIENT]" << "[" << route << "]" << " " << data;
+            logFile(ss.str());
+
             router[route](client_socket, data);
         } else {
             send_response(client_socket, "Invalid route");
@@ -163,9 +190,22 @@ string handle_get_all_project(const json& data) {
         return init_response(false, "Session is not availble", "");
 
     string userId = getIdUserBySession(session);
-    string projects = getAllProjectById(userId);
+    vector<Project> projects = getProjectsByUserId(userId);
 
-    return projects;
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Successful";
+    responseData["data"] = json::array();
+
+    for (const Project& project : projects) {
+        json projectData;
+        projectData["id"] = project.id;
+        projectData["name"] = project.name;
+        projectData["id_owner"] = project.ownerId;
+        responseData["data"].push_back(projectData);
+    }
+
+    return responseData.dump();
 }
 
 string handle_create_project(const json& data) {
@@ -212,6 +252,10 @@ string handle_login_request(const json& data) {
         getline(ss, session, ',');
 
         if (uname == username && pwd == password) {
+            if(session != "") {
+                return init_response(false, "[ERROR]: User already logined", "");
+            }
+
             session = generateRandomID();
         }
 
@@ -297,41 +341,36 @@ string handle_register_request(const json& data) {
 }
 
 string handle_logout_request(const json& data) {
-    string username = data["username"];
-
-    // Remove the session for the user in the file
+    string session = data["session"];
     ifstream file(USER_FILE);
     if (!file) {
-        return "Failed to open " + string(USER_FILE);
+        return init_response(false, "Failed to open " + string(USER_FILE), "");
     }
 
     string line;
-    vector<string> lines;  // To store all lines in memory
+    vector<string> lines;
     bool sessionRemoved = false;
 
     while (getline(file, line)) {
         stringstream ss(line);
-        string id, uname, pwd, session;
+        string id, uname, pwd, sessionFile;
         getline(ss, id, ',');
         getline(ss, uname, ',');
         getline(ss, pwd, ',');
-        getline(ss, session, ',');
+        getline(ss, sessionFile, ',');
 
-        if (uname == username) {
-            // Remove the session for the user
-            session = "";
+        if (sessionFile == session) {
+            sessionFile = "";
             sessionRemoved = true;
         }
 
-        lines.push_back(id + "," + uname + "," + pwd + "," + session);
+        lines.push_back(id + "," + uname + "," + pwd + "," + sessionFile);
     }
 
     file.close();
-
-    // Write the modified lines back to the file
     ofstream outFile(USER_FILE);
     if (!outFile) {
-        return "Failed to open " + string(USER_FILE) + " for writing";
+        return init_response(false, "Failed to open " + string(USER_FILE) + " for writing", "");
     }
 
     for (const string& line : lines) {
@@ -341,9 +380,9 @@ string handle_logout_request(const json& data) {
     outFile.close();
 
     if (sessionRemoved) {
-        return "Logout successful";
+        return init_response(true, "Logout successful", "");
     } else {
-        return "User not found";
+        return init_response(false, "User not found", "");
     }
 }
 
@@ -433,8 +472,8 @@ string handle_member_add_request(const json& data) {
     }
 
     // Add the new member
-    std::ofstream outputFile(MEMBER_FILE, std::ios::app);
-    outputFile << generateRandomID() << "," << idUser << "," << idProject << std::endl;
+    ofstream outputFile(MEMBER_FILE, ios::app);
+    outputFile << generateRandomID() << "," << idUser << "," << idProject << endl;
     outputFile.close();
 
     vector<MemberData> membersData = getAllMembers(idProject);
@@ -607,7 +646,28 @@ string handle_task_add_comment_request(const json& data) {
     return editCommentByTaskId(id_task, new_comment);
 }
 
+string handle_chat_get_start(int client_socket, const json& data) {
+    string session = data["session"];
+    string idProject = data["id_project"];
+
+    string idUser = getIdUserBySession(session);
+    if (idUser.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    // send all old message in project to client
+    string messages = getAllMessagesByProjectId(idProject);
+
+    return init_response(true, "Get message", messages);
+}
+
 void send_response(int client_socket, const string& response) {
+
+    // Store log
+    stringstream ss;
+    ss << "[" << getCurrentTime() << "]" << "[SERVER]" << " " << response;
+    logFile(ss.str());
+
     send(client_socket, response.c_str(), response.length(), 0);
 }
 
@@ -653,10 +713,10 @@ int main() {
         if (fork() == 0) {
             close(server_fd);
             handle_client(new_socket);
-            exit(0);
-        }
+        exit(0);
+}
         close(new_socket);
     }
-
-    return 0;
+    
+        return 0;
 }

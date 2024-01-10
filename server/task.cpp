@@ -47,7 +47,9 @@ string getAllTasksByProjectID(const string& projectID) {
     for (const string& task : tasks) {
         data += task + ",";
     }
-    data.pop_back();
+    if(data[data.length() - 1] == ',') {
+        data.pop_back();
+    } 
     data += "]";
 
     return init_response(true, "Get tasks successed", data);

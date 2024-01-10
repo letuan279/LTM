@@ -1,12 +1,15 @@
 // #include "mainwindow.h"
 
 #include <QApplication>
+#include <QThread>
+#include <QCoreApplication>
 #include <QLocale>
 #include <QTranslator>
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QString>
 #include <QMessageBox>
 #include <QtWidgets>
 
@@ -21,6 +24,7 @@
 
 using namespace std;
 
+// Define type
 struct Account {
     string id;
     string username;
@@ -239,6 +243,34 @@ void getTaskList(const QWidget* screen) {
             }
         }
     }
+
+string parseMessages(const string& res)
+{
+    QString jsonString = QString::fromStdString(res);
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+    if (!jsonDoc.isNull()) {
+        if (jsonDoc.isObject()) {
+            QJsonObject jsonObj = jsonDoc.object();
+            int success = jsonObj["success"].toInt();
+            if (success == 1) {
+                QJsonArray dataArray = jsonObj["data"].toArray();
+                QString messagesString;
+                for (const QJsonValue& value : dataArray) {
+                    QJsonObject messageObj = value.toObject();
+                    QString content = messageObj["content"].toString();
+                    QString username = messageObj["username"].toString();
+                    QString time = messageObj["time"].toString();
+                    QString messageDetails = QString("Username: %1\nTime: %2\nContent: %3\n\n")
+                                                 .arg(username, time, content);
+
+                    messagesString.append(messageDetails);
+                }
+                return messagesString.toStdString();
+            }
+        }
+    }
+
+    return "";
 }
 
 int main(int argc, char *argv[])
@@ -297,13 +329,49 @@ int main(int argc, char *argv[])
         string passwordStr = password.toStdString();
         string res = performRegister(usernameStr, passwordStr);
 
-        qDebug() << res;
+        QString jsonString = QString::fromStdString(res);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        if (!jsonDoc.isNull()) {
+            if (jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+                if(!success){
+                    QMessageBox::critical(nullptr, "Error", message);
+                } else {
+                    registerScreen.hide();
+                    loginScreen.show();
+                    QMessageBox::information(nullptr, "Success", message);
+                }
+            }
+        }
     });
 
     loginScreen.show();
 
     QObject::connect(&projectListScreen, &ProjectListScreen::widgetShown, [&]() {
         getAllProjectList(projectListScreen);
+    });
+
+    QObject::connect(&projectListScreen, &ProjectListScreen::logout, [&]() {
+        string res = performLogout(acc.session);
+
+        QString jsonString = QString::fromStdString(res);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        if (!jsonDoc.isNull()) {
+            if (jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+                if(!success){
+                    QMessageBox::critical(nullptr, "Error", message);
+                } else {
+                    projectListScreen.hide();
+                    loginScreen.show();
+                    QMessageBox::information(nullptr, "Success", message);
+                }
+            }
+        }
     });
 
     QPushButton *chatBtn = projectDetailsScreen.findChild<QPushButton*>("chat_btn"); // 0
@@ -469,3 +537,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+

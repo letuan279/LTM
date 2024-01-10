@@ -1,14 +1,10 @@
-#ifndef CALL_H
-#define CALL_H
-
-#endif // CALL_H
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include "call.h"
 
 using namespace std;
 
@@ -72,57 +68,8 @@ string performRegister(const string& username, const string& password) {
     return res;
 }
 
-string performLogout(const string& session) {
-    string message = R"({"route": "logout", "data": {"session": ")" + session + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performGetUserById(const string& id)
-{
-    string message = R"({"route": "user/id", "data": {"id": ")" + id + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performGetAllUser(const string& session)
-{
-    string message = R"({"route": "user/all", "data": {"session": ")" + session + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performGetProjectList(const string& session)
-{
-    string message = R"({"route": "project/all", "data": {"session": ")" + session + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performCreateProject(const string& session, const string& name)
-{
-    string message = R"({"route": "project/create", "data": {"session": ")" + session + R"(", "name": ")" + name + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performGetMemberList(const string& session, const string& id_project)
-{
-    string message = R"({"route": "member/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performAddMember(const string& session, const string& id_project, const string& id_user)
-{
-    string message = R"({"route": "member/add", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + R"(", "id_user": ")" + id_user + "\"}}";
-    string res = call(message);
-    return res;
-}
-
-string performGetTaskList(const string& session, const string& id_project)
-{
-    string message = R"({"route": "task/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
+string getMessages(const string& session, const string& id_project) {
+    string message = R"({"route": "chat/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
     string res = call(message);
     return res;
 }
