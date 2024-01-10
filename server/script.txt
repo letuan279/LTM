@@ -1,3 +1,7 @@
 g++ client.cpp -o client.out && ./client.out
 
 g++ server.cpp -o server.out && ./server.out
+
+g++ chat_server.cpp -o chat_server.out && ./chat_server.out
+
+g++ chat_client.cpp -o chat_client.out && ./chat_client.out

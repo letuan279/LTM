@@ -13,12 +13,14 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <random>
+
 #include "config.hpp"
 #include "utils.hpp"
 
 #include "project.cpp"
 #include "user.cpp"
 #include "member.cpp"
+#include "message.cpp"
 #include "task.cpp"
 
 using json = nlohmann::json;
@@ -46,6 +48,8 @@ string handle_task_create_request(const json& data);
 string handle_task_assign_request(const json& data);
 string handle_task_update_status_request(const json& data);
 string handle_task_add_comment_request(const json& data);
+
+string handle_chat_get_start(int client_socket, const json& data);
 
 void send_response(int client_socket, const string& response);
 
@@ -111,6 +115,11 @@ void register_routes() {
         send_response(client_socket, response);
     };
 
+    router["chat/get"] = [](int client_socket, const json& data) {
+        string response = handle_chat_get_start(client_socket, data);
+        send_response(client_socket, response);
+    };
+    
     router["task/create"] = [](int client_socket, const json& data) {
         string response = handle_task_create_request(data);
         send_response(client_socket, response);
@@ -157,9 +166,22 @@ string handle_get_all_project(const json& data) {
         return init_response(false, "Session is not availble", "");
 
     string userId = getIdUserBySession(session);
-    string projects = getAllProjectById(userId);
+    vector<Project> projects = getProjectsByUserId(userId);
 
-    return projects;
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Successful";
+    responseData["data"] = json::array();
+
+    for (const Project& project : projects) {
+        json projectData;
+        projectData["id"] = project.id;
+        projectData["name"] = project.name;
+        projectData["id_owner"] = project.ownerId;
+        responseData["data"].push_back(projectData);
+    }
+
+    return responseData.dump();
 }
 
 string handle_create_project(const json& data) {
@@ -590,6 +612,21 @@ string handle_task_add_comment_request(const json& data) {
     return editCommentByTaskId(id_task, new_comment);
 }
 
+string handle_chat_get_start(int client_socket, const json& data) {
+    string session = data["session"];
+    string idProject = data["id_project"];
+
+    string idUser = getIdUserBySession(session);
+    if (idUser.empty()) {
+        return R"({"success": 0,"message": "User not found","data": []})";
+    }
+
+    // send all old message in project to client
+    string messages = getAllMessagesByProjectId(idProject);
+
+    return init_response(true, "Get message", messages);
+}
+
 void send_response(int client_socket, const string& response) {
     send(client_socket, response.c_str(), response.length(), 0);
 }
@@ -636,10 +673,10 @@ int main() {
         if (fork() == 0) {
             close(server_fd);
             handle_client(new_socket);
-            exit(0);
-        }
+        exit(0);
+}
         close(new_socket);
     }
-
-    return 0;
+    
+        return 0;
 }

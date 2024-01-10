@@ -15,11 +15,7 @@ int main() {
     // std::string message = R"({"route": "member/add", "data": {"session": "LEnGx", "id_project": "2frwa", "id_user":"123ml"}})";
     // std::string message = R"({"route": "member/delete", "data": {"session": "LEnGx", "id_project": "2frwa", "id_user":"123ml"}})";
     // std::string message = R"({"route": "login", "data": {"username": "tuan", "password": "1234"}})";
-    // std::string message = R"({"route": "task/get", "data": {"session": "CSSgo", "id_project": "OlDHv"}})";
-    // std::string message = R"({"route": "task/create", "data": {"session": "CSSgo", "id_project": "OlDHv", "name": "Task_123", "status": "TODO", "start_date": "2024/1/1", "end_date": "2024/2/3"}})";
-    // std::string message = R"({"route": "task/assign", "data": {"session": "CSSgo", "id_task": "9ChM9", "id_user":"asd23"}})";
-    // std::string message = R"({"route": "task/update_status", "data": {"session": "CSSgo", "id_task": "9ChM9", "new_status":"DON"}})";
-    std::string message = R"({"route": "task/add_comment", "data": {"session": "CSSgo", "id_task": "9ChM9", "comment_text":"Sample comment"}})";
+    std::string message = R"({"route": "chat/get", "data": {"session": "CSSgo", "id_project": "OlDHv"}})";
 
     char buffer[1024] = {0};
 

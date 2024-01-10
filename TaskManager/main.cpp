@@ -1,12 +1,15 @@
 // #include "mainwindow.h"
 
 #include <QApplication>
+#include <QThread>
+#include <QCoreApplication>
 #include <QLocale>
 #include <QTranslator>
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QString>
 #include <QMessageBox>
 #include <QtWidgets>
 
@@ -19,6 +22,7 @@
 
 using namespace std;
 
+// Define type
 struct Account {
     string id;
     string username;
@@ -49,6 +53,39 @@ std::vector<Project> projects;
 Project currProject;
 std::vector<Task> currTask;
 std::vector<Account> currMember;
+
+// Action define
+
+string parseMessages(const string& res)
+{
+    QString jsonString = QString::fromStdString(res);
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+    if (!jsonDoc.isNull()) {
+        if (jsonDoc.isObject()) {
+            QJsonObject jsonObj = jsonDoc.object();
+
+            int success = jsonObj["success"].toInt();
+            if (success == 1) {
+                QJsonArray dataArray = jsonObj["data"].toArray();
+                QString messagesString;
+                for (const QJsonValue& value : dataArray) {
+                    QJsonObject messageObj = value.toObject();
+                    QString content = messageObj["content"].toString();
+                    QString username = messageObj["username"].toString();
+                    QString time = messageObj["time"].toString();
+                    QString messageDetails = QString("Username: %1\nTime: %2\nContent: %3\n\n")
+                                                 .arg(username, time, content);
+
+                    messagesString.append(messageDetails);
+                }
+                return messagesString.toStdString();
+            }
+        }
+    }
+
+    return "";
+}
 
 int main(int argc, char *argv[])
 {
@@ -346,3 +383,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+
