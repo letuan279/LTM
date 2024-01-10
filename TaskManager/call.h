@@ -71,3 +71,31 @@ string performRegister(const string& username, const string& password) {
     string res = call(message);
     return res;
 }
+
+string performGetUserById(const string& id)
+{
+    string message = R"({"route": "user", "data": {"id": ")" + id + "\"}}";
+    string res = call(message);
+    return res;
+}
+
+string performGetProjectList(const string& session)
+{
+    string message = R"({"route": "project/all", "data": {"session": ")" + session + "\"}}";
+    string res = call(message);
+    return res;
+}
+
+string performGetMemberList(const string& session, const string& id_project)
+{
+    string message = R"({"route": "member/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
+    string res = call(message);
+    return res;
+}
+
+string performGetTaskList(const string& session, const string& id_project)
+{
+    string message = R"({"route": "task/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
+    string res = call(message);
+    return res;
+}

@@ -13,32 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>60</y>
-     <width>104</width>
-     <height>70</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>Project list</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="testBtn">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>150</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>test</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
