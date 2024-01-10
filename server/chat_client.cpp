@@ -179,7 +179,6 @@ int main()
             string getProjectMessage = R"({"route": "project/all", "data": {"session": ")"
                                 + string(user.session) + R"("}})";
             string res = call(getProjectMessage, 8080);
-            cout << "RES:::" << getProjectMessage << endl;
             json jsonData = json::parse(res);
             json dataArray = jsonData["data"];
             for (const auto& item : dataArray) {
@@ -189,6 +188,11 @@ int main()
             }
             break;
         }
+    }
+
+    if(projects.size() == 0) {
+        cout << "Khong co du an nao!" << endl;
+        return 0;
     }
 	
     // Select project

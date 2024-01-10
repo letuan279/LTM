@@ -166,12 +166,22 @@ string handle_get_all_project(const json& data) {
         return init_response(false, "Session is not availble", "");
 
     string userId = getIdUserBySession(session);
-    cout << "USERID:::" << userId << endl;
+    vector<Project> projects = getProjectsByUserId(userId);
 
-    string projects = getAllProjectById(userId);
-    cout << "projects:::" << projects << endl;
+    json responseData;
+    responseData["success"] = 1;
+    responseData["message"] = "Successful";
+    responseData["data"] = json::array();
 
-    return projects;
+    for (const Project& project : projects) {
+        json projectData;
+        projectData["id"] = project.id;
+        projectData["name"] = project.name;
+        projectData["id_owner"] = project.ownerId;
+        responseData["data"].push_back(projectData);
+    }
+
+    return responseData.dump();
 }
 
 string handle_create_project(const json& data) {
