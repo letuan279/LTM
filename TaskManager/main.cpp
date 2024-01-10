@@ -141,7 +141,22 @@ int main(int argc, char *argv[])
         string passwordStr = password.toStdString();
         string res = performRegister(usernameStr, passwordStr);
 
-        qDebug() << res;
+        QString jsonString = QString::fromStdString(res);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        if (!jsonDoc.isNull()) {
+            if (jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+                if(!success){
+                    QMessageBox::critical(nullptr, "Error", message);
+                } else {
+                    registerScreen.hide();
+                    loginScreen.show();
+                    QMessageBox::information(nullptr, "Success", message);
+                }
+            }
+        }
     });
 
     loginScreen.show();

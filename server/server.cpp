@@ -27,6 +27,8 @@ using json = nlohmann::json;
 using namespace std;
 
 // Function Define 
+void logFile(string content);
+
 void handle_request(int client_socket, const string& request);
 
 string handle_login_request(const json& data);
@@ -141,6 +143,16 @@ void register_routes() {
     };
 }
 
+void logFile(string content) {
+    ofstream file(LOG_FILE, ios::app);
+    if (file.is_open()) {
+        file << content << endl;
+        file.close();
+    } else {
+        cout << "Failed to open the file." << endl;
+    }
+}
+
 void handle_request(int client_socket, const string& request) {
     json json_obj = json::parse(request);
 
@@ -150,6 +162,12 @@ void handle_request(int client_socket, const string& request) {
 
         if (router.find(route) != router.end()) {
             cout << "API: " << route << endl;
+            
+            // Store log
+            stringstream ss;
+            ss << "[" << getCurrentTime() << "]" << "[CLIENT]" << "[" << route << "]" << " " << data;
+            logFile(ss.str());
+
             router[route](client_socket, data);
         } else {
             send_response(client_socket, "Invalid route");
@@ -437,8 +455,8 @@ string handle_member_add_request(const json& data) {
     }
 
     // Add the new member
-    std::ofstream outputFile(MEMBER_FILE, std::ios::app);
-    outputFile << generateRandomID() << "," << idUser << "," << idProject << std::endl;
+    ofstream outputFile(MEMBER_FILE, ios::app);
+    outputFile << generateRandomID() << "," << idUser << "," << idProject << endl;
     outputFile.close();
 
     vector<MemberData> membersData = getAllMembers(idProject);
@@ -627,6 +645,12 @@ string handle_chat_get_start(int client_socket, const json& data) {
 }
 
 void send_response(int client_socket, const string& response) {
+
+    // Store log
+    stringstream ss;
+    ss << "[" << getCurrentTime() << "]" << "[SERVER]" << " " << response;
+    logFile(ss.str());
+
     send(client_socket, response.c_str(), response.length(), 0);
 }
 

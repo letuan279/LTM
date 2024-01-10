@@ -4,3 +4,4 @@
 #define MEMBER_FILE "data/members.csv"
 #define TASK_FILE "data/tasks.csv"
 #define MESSAGE_FILE "data/messages.csv"
+#define LOG_FILE "logs/log.txt"
