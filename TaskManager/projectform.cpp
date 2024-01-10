@@ -12,3 +12,15 @@ ProjectForm::~ProjectForm()
 {
     delete ui;
 }
+
+void ProjectForm::on_buttonBox_accepted()
+{
+    emit handleAccept();
+}
+
+
+void ProjectForm::on_buttonBox_rejected()
+{
+    emit handleReject();
+}
+

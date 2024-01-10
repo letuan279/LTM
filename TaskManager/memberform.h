@@ -1,19 +1,19 @@
-#ifndef PROJECTFORM_H
-#define PROJECTFORM_H
+#ifndef MEMBERFORM_H
+#define MEMBERFORM_H
 
 #include <QDialog>
 
 namespace Ui {
-class ProjectForm;
+class MemberForm;
 }
 
-class ProjectForm : public QDialog
+class MemberForm : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ProjectForm(QWidget *parent = nullptr);
-    ~ProjectForm();
+    explicit MemberForm(QWidget *parent = nullptr);
+    ~MemberForm();
 
 signals:
     void handleAccept();
@@ -25,7 +25,7 @@ private slots:
     void on_buttonBox_rejected();
 
 private:
-    Ui::ProjectForm *ui;
+    Ui::MemberForm *ui;
 };
 
-#endif // PROJECTFORM_H
+#endif // MEMBERFORM_H

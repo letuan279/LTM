@@ -74,6 +74,17 @@ string getCurrentDate() {
     return formattedDate;
 }
 
+template<typename T>
+bool findInVector(const vector<T>& vec, T& key) {
+    auto it = std::find(vec.begin(), vec.end(), key);
+
+    if (it != vec.end()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 string getCurrentTime() {
     auto now = chrono::system_clock::now();
     time_t currentTime = chrono::system_clock::to_time_t(now);

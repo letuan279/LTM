@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProjectForm</class>
- <widget class="QDialog" name="ProjectForm">
+ <class>MemberForm</class>
+ <widget class="QDialog" name="MemberForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>152</height>
+    <width>342</width>
+    <height>160</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <rect>
      <x>40</x>
      <y>100</y>
-     <width>341</width>
+     <width>281</width>
      <height>32</height>
     </rect>
    </property>
@@ -27,19 +27,6 @@
    </property>
    <property name="standardButtons">
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>10</y>
-     <width>141</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Create new project</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -52,18 +39,40 @@
     </rect>
    </property>
    <property name="text">
-    <string>Project's name: </string>
+    <string>Choose member</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="input_project_name">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>50</y>
-     <width>251</width>
-     <height>25</height>
+     <x>90</x>
+     <y>0</y>
+     <width>141</width>
+     <height>17</height>
     </rect>
    </property>
+   <property name="text">
+    <string>Add member</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>-10</y>
+     <width>160</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QComboBox" name="input_list_member">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
@@ -71,7 +80,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>ProjectForm</receiver>
+   <receiver>MemberForm</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -87,7 +96,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>ProjectForm</receiver>
+   <receiver>MemberForm</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
