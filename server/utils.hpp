@@ -9,6 +9,8 @@
 #include <random>
 #include <chrono>
 #include <ctime>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 using json = nlohmann::json;
@@ -19,7 +21,7 @@ bool isJson(const string str) {
         json data = json::parse(str);
         return true;
     }
-    catch(const std::exception& e)
+    catch(const exception& e)
     {
         return false;
     }
@@ -70,4 +72,14 @@ string getCurrentDate() {
     strftime(dateString, sizeof(dateString), "%Y/%m/%d", timeInfo);
     string formattedDate(dateString);
     return formattedDate;
+}
+
+string getCurrentTime() {
+    auto now = chrono::system_clock::now();
+    time_t currentTime = chrono::system_clock::to_time_t(now);
+    
+    stringstream ss;
+    ss << put_time(localtime(&currentTime), "%Y-%m-%d %H:%M:%S");
+    
+    return ss.str();
 }

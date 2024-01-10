@@ -11,7 +11,7 @@
 #include <mutex>
 #include <nlohmann/json.hpp>
 #include <chrono>
-#define MAX_LEN 1024
+#define MAX_LEN 10000
 
 using namespace std;
 using json = nlohmann::json;
@@ -19,7 +19,7 @@ using json = nlohmann::json;
 bool exit_flag=false;
 thread t_send, t_recv;
 int client_socket;
-constexpr int bufferSize = 1024;
+constexpr int bufferSize = 10000;
 
 struct User
 {
@@ -144,6 +144,27 @@ string getMessages(string session, string id_project) {
     return messages;
 }
 
+vector<string> splitString(const string& input, char delimiter) {
+    vector<string> result;
+    istringstream iss(input);
+    string token;
+    
+    while (getline(iss, token, delimiter)) {
+        result.push_back(token);
+    }
+    
+    return result;
+}
+
+string formatRecv(string res) {
+    vector<string> components = splitString(res, '|');
+    
+    std::stringstream ss;
+    ss << components.at(0) << " (" << getTimeAgo(components.at(1)) << ") : " << components.at(2);
+    
+    return ss.str();
+}
+
 int main()
 {
 	signal(SIGINT, catch_ctrl_c);
@@ -243,7 +264,7 @@ int main()
 	}
 
     string joinChatString = user.id + "|" + projectChoosen.id;
-    send(client_socket, joinChatString.c_str(), joinChatString.length(), 0);
+    send(client_socket, joinChatString.c_str(), 11, 0);
 	thread t1(send_message, client_socket);
 	thread t2(recv_message, client_socket);
 
@@ -285,8 +306,8 @@ void send_message(int client_socket)
 	while(1)
 	{
 		cout << "Enter message : ";
-		cout << "Enter message 2: ";
 		char str[MAX_LEN];
+        cin.clear();
 		cin.getline(str,MAX_LEN);
         string sendMess = string(str);
 		send(client_socket,sendMess.c_str(),sendMess.length(),0);
@@ -304,6 +325,7 @@ void recv_message(int client_socket)
 {
 	while(1)
 	{
+        eraseText(16);
 		if(exit_flag)
 			return;
 
@@ -316,8 +338,9 @@ void recv_message(int client_socket)
         buffer[receivedBytes] = '\0';
 
         string response(buffer);
-
-        cout << response << endl;
+        eraseText(16);
+        cout << formatRecv(response) << endl;
+        cout << "Enter message : ";
         fflush(stdout);
 	}	
 }
