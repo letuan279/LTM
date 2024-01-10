@@ -1,2 +1,2 @@
-./server/*.out
-/build-TaskManager-Desktop_Qt_6_6_1_GCC_64bit-Debug
+/server/*.out
+/build*

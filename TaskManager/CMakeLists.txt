@@ -29,10 +29,15 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         loginscreen.h loginscreen.cpp loginscreen.ui
         registerscreen.h registerscreen.cpp registerscreen.ui
         call.h
-        projectlist.h projectlist.cpp projectlist.ui
-        memberscreen.h memberscreen.cpp memberscreen.ui
 
 
+
+        taskscreen.h taskscreen.cpp taskscreen.ui
+        chatscreen.h chatscreen.cpp chatscreen.ui
+        projectlistscreen.h projectlistscreen.cpp projectlistscreen.ui
+        projectlistscreen.h projectlistscreen.cpp projectlistscreen.ui
+        projectdetails.h projectdetails.cpp projectdetails.ui
+        projectform.h projectform.cpp projectform.ui
 
     )
 # Define target properties for Android with Qt 6 as:

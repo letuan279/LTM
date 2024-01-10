@@ -60,3 +60,62 @@ vector<MemberData> getAllMembers(const string& idProject) {
     return members;
 }
 
+bool isOwnerProject(const string& idUser, const string& idProject) {
+    ifstream prj_file(MEMBER_FILE);
+    if (!prj_file) {
+        return false;
+    }
+
+    string line;
+    vector<string> lines;
+
+    while (getline(prj_file, line)) {
+        stringstream ss(line);
+        string id, id_user, id_project;
+        getline(ss, id, ',');
+        getline(ss, id_user, ',');
+        getline(ss, id_project, ',');
+
+        if (idUser == id_user && idProject == id_project) {
+            prj_file.close();
+            return true;
+        }
+    }
+
+    prj_file.close();
+    return false;
+}
+
+bool isOwnerTask(const string& idUser, const string& idTask) {
+    ifstream prj_file(TASK_FILE);
+    if (!prj_file) {
+        return false;
+    }
+
+    string line;
+    vector<string> lines;
+
+    while (getline(prj_file, line)) {
+        stringstream iss(line);
+        string id, id_project, id_manager, name, status, id_assign, comment, start_date, end_date;
+        
+        if (getline(iss, id, ',') &&
+            getline(iss, id_project, ',') &&
+            getline(iss, id_manager, ',') &&
+            getline(iss, name, ',') &&
+            getline(iss, status, ',') &&
+            getline(iss, id_assign, ',') &&
+            getline(iss, comment, ',') &&
+            getline(iss, start_date, ',') &&
+            getline(iss, end_date, ',')) {
+
+            if (idTask == id) {
+                prj_file.close();
+                return isOwnerProject(idUser, id_project);
+            }
+        }
+    }
+
+    prj_file.close();
+    return false;   
+}

@@ -21,6 +21,7 @@
 #include "user.cpp"
 #include "member.cpp"
 #include "message.cpp"
+#include "task.cpp"
 
 using json = nlohmann::json;
 using namespace std;
@@ -32,6 +33,8 @@ string handle_login_request(const json& data);
 string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
 
+string handle_get_user_by_id(const json&data);
+
 string handle_get_all_project(const json& data);
 string handle_create_project(const json& data);
 string handle_delete_project(const json& data);
@@ -41,6 +44,10 @@ string handle_member_add_request(const json& data);
 string handle_member_delete_request(const json& data);
 
 string handle_task_get_request(const json& data);
+string handle_task_create_request(const json& data);
+string handle_task_assign_request(const json& data);
+string handle_task_update_status_request(const json& data);
+string handle_task_add_comment_request(const json& data);
 
 string handle_chat_get_start(int client_socket, const json& data);
 
@@ -65,6 +72,11 @@ void register_routes() {
 
     router["logout"] = [](int client_socket, const json& data) {
         string response = handle_logout_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["user"] = [](int client_socket, const json& data) {
+        string response = handle_get_user_by_id(data);
         send_response(client_socket, response);
     };
 
@@ -107,12 +119,26 @@ void register_routes() {
         string response = handle_chat_get_start(client_socket, data);
         send_response(client_socket, response);
     };
+    
+    router["task/create"] = [](int client_socket, const json& data) {
+        string response = handle_task_create_request(data);
+        send_response(client_socket, response);
+    };
 
-    // router["chat/test"] = [](int client_socket, const json& data) {
-    //     lock_guard<mutex> lock(chatMembersMutex);
-    //     string response = to_string(chatMembers.size());
-    //     send_response(client_socket, response);
-    // };
+    router["task/assign"] = [](int client_socket, const json& data) {
+        string response = handle_task_assign_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["task/update_status"] = [](int client_socket, const json& data) {
+        string response = handle_task_update_status_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["task/add_comment"] = [](int client_socket, const json& data) {
+        string response = handle_task_add_comment_request(data);
+        send_response(client_socket, response);
+    };
 }
 
 void handle_request(int client_socket, const string& request) {
@@ -164,7 +190,7 @@ string handle_create_project(const json& data) {
 }
 
 string handle_delete_project(const json& data) {
-    
+    return "";
 }
 
 string handle_login_request(const json& data) {
@@ -327,6 +353,18 @@ string handle_logout_request(const json& data) {
     }
 }
 
+string handle_get_user_by_id(const json& data) {
+    string id = data["id"];
+
+    if (id.empty()) return init_response(false, "User not found", "");
+
+    string user = getUserById(id);
+
+    if (user.empty()) return init_response(false, "User not found", "");
+
+    return init_response(true, "User found", user);
+}
+
 string handle_member_get_request(const json& data) {
     string session = data["session"];
     string idProject = data["id_project"];
@@ -480,15 +518,88 @@ string handle_member_delete_request(const json& data) {
 
 string handle_task_get_request(const json& data) {
     string session = data["session"];
-    string idProject = data["id_project"];
+    string id_project = data["id_project"];
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_project.empty()) return init_response(false, "Field id_project must not be empty", "");
 
-    string idUserRequest = getIdUserBySession(session);
+    string id_user = getIdUserBySession(session);
+    if (id_user.empty()) init_response(false, "User not found", "");
 
-    if (idUserRequest.empty()) {
-        return R"({"success": 0,"message": "User not found","data": []})";
-    }
+    return getAllTasksByProjectID(id_project);
+}
 
-    
+string handle_task_create_request(const json& data) {
+    string session = data["session"];
+    string id_project = data["id_project"];
+    string name = data["name"];
+    string status = data["status"];
+    string start_date = data["start_date"];
+    string end_date = data["end_date"];
+
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_project.empty()) return init_response(false, "Field id_project must not be empty", "");
+    if (name.empty()) return init_response(false, "Field name must not be empty", "");
+    if (status.empty()) status = "TODO";
+    if (start_date.empty()) start_date = getCurrentDate();
+    if (end_date.empty()) return init_response(false, "Field end_date must not be empty", "");
+
+    string id_user = getIdUserBySession(session);
+
+    if (id_user.empty()) init_response(false, "User not found", "");
+    if (!isOwnerProject(id_user, id_project)) init_response(false, "Permission denied", "");
+
+    return createNewTask(id_user, id_project, name, status, start_date, end_date);
+}
+
+string handle_task_assign_request(const json& data) {
+    string session = data["session"];
+    string id_task = data["id_task"];
+    string id_assign = data["id_user"];
+
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_task.empty()) return init_response(false, "Field id_task must not be empty", "");
+    if (id_assign.empty()) return init_response(false, "Field id_user must not be empty", "");
+
+    string id_user = getIdUserBySession(session);
+
+    if (id_user.empty()) init_response(false, "User not found", "");
+    if (!isOwnerTask(id_user, id_task)) init_response(false, "Permission denied", "");
+
+    return assignTaskToUser(id_task, id_assign);
+}
+
+string handle_task_update_status_request(const json& data) {
+    string session = data["session"];
+    string id_task = data["id_task"];
+    string new_status = data["new_status"];
+
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_task.empty()) return init_response(false, "Field id_task must not be empty", "");
+    if (new_status.empty()) return init_response(false, "Field new_status must not be empty", "");
+
+    string id_user = getIdUserBySession(session);
+
+    if (id_user.empty()) init_response(false, "User not found", "");
+    // if (!isOwnerTask(id_user, id_task)) init_response(false, "Permission denied", "");
+
+    return updateStatusByTaskId(id_task, new_status);
+}
+
+string handle_task_add_comment_request(const json& data) {
+    string session = data["session"];
+    string id_task = data["id_task"];
+    string new_comment = data["comment_text"];
+
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_task.empty()) return init_response(false, "Field id_task must not be empty", "");
+    if (new_comment.empty()) return init_response(false, "Field comment_text must not be empty", "");
+
+    string id_user = getIdUserBySession(session);
+
+    if (id_user.empty()) init_response(false, "User not found", "");
+    if (!isOwnerTask(id_user, id_task)) init_response(false, "Permission denied", "");
+
+    return editCommentByTaskId(id_task, new_comment);
 }
 
 string handle_chat_get_start(int client_socket, const json& data) {
@@ -539,6 +650,8 @@ int main() {
     listen(server_fd, 1024);
 
     register_routes();
+
+    cout << "Server is running on port " << PORT << endl;
 
     while (1) {
         new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addr_len);
