@@ -32,6 +32,7 @@ string handle_register_request(const json& data);
 string handle_logout_request(const json& data);
 
 string handle_get_user_by_id(const json&data);
+string handle_get_all_users(const json&data);
 
 string handle_get_all_project(const json& data);
 string handle_create_project(const json& data);
@@ -71,8 +72,13 @@ void register_routes() {
         send_response(client_socket, response);
     };
 
-    router["user"] = [](int client_socket, const json& data) {
+    router["user/id"] = [](int client_socket, const json& data) {
         string response = handle_get_user_by_id(data);
+        send_response(client_socket, response);
+    };
+
+    router["user/all"] = [](int client_socket, const json& data) {
+        string response = handle_get_all_users(data);
         send_response(client_socket, response);
     };
 
@@ -351,6 +357,17 @@ string handle_get_user_by_id(const json& data) {
     if (user.empty()) return init_response(false, "User not found", "");
 
     return init_response(true, "User found", user);
+}
+
+string handle_get_all_users(const json& data) {
+    string session = data["session"];
+
+    if (session.empty()) return init_response(false, "User not found", "");
+
+    string id = getIdUserBySession(session);
+    if (id.empty()) return init_response(false, "User not found", "");
+
+    return getAllUsers(id);
 }
 
 string handle_member_get_request(const json& data) {
