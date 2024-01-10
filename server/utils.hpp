@@ -71,3 +71,14 @@ string getCurrentDate() {
     string formattedDate(dateString);
     return formattedDate;
 }
+
+template<typename T>
+bool findInVector(const vector<T>& vec, T& key) {
+    auto it = std::find(vec.begin(), vec.end(), key);
+
+    if (it != vec.end()) {
+        return true;
+    } else {
+        return false;
+    }
+}
