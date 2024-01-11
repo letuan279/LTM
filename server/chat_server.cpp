@@ -14,7 +14,7 @@
 #include "user.cpp"
 #include "message.cpp"
 
-#define MAX_LEN 1024
+#define MAX_LEN 10000
 
 using namespace std;
 

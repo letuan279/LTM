@@ -61,7 +61,7 @@ vector<MemberData> getAllMembers(const string& idProject) {
 }
 
 bool isOwnerProject(const string& idUser, const string& idProject) {
-    ifstream prj_file(MEMBER_FILE);
+    ifstream prj_file(PROJECT_FILE);
     if (!prj_file) {
         return false;
     }
@@ -71,12 +71,12 @@ bool isOwnerProject(const string& idUser, const string& idProject) {
 
     while (getline(prj_file, line)) {
         stringstream ss(line);
-        string id, id_user, id_project;
+        string id, name, id_owner;
         getline(ss, id, ',');
-        getline(ss, id_user, ',');
-        getline(ss, id_project, ',');
+        getline(ss, name, ',');
+        getline(ss, id_owner, ',');
 
-        if (idUser == id_user && idProject == id_project) {
+        if (id == idProject && id_owner == idUser) {
             prj_file.close();
             return true;
         }
