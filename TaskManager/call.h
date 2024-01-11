@@ -127,7 +127,7 @@ string performAddMember(const string& session, const string& id_project, const s
     return res;
 }
 
-string performAddTask(const string& session, const string& id_project, const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign)
+string performAddTask(string session, string id_project, string name, string status, string start_date, string end_date, string comment, string id_assign)
 {
     string message = R"({"route": "task/create", "data": {"session": ")" + session +
                      R"(", "id_project": ")" + id_project +

@@ -37,8 +37,7 @@ string getUserById(const string& user_id) {
 
         if (getline(iss, id, ',') &&
             getline(iss, username, ',') &&
-            getline(iss, password, ',') &&
-            getline(iss, sessionFromFile, ',')) {
+            getline(iss, password, ',')) {
             
             if (id == user_id) {
                 return "{\"id\":\"" + id + "\",\"username\":\"" + username + "\"}";

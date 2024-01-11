@@ -590,7 +590,7 @@ int main(int argc, char *argv[])
         }
     });
 
-    QObject::connect(&taskCreateFormPopup, &TaskForm::handleAccept, [&](const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign) {
+    QObject::connect(&taskCreateFormPopup, &TaskForm::handleAccept, [&](string name, string status, string start_date, string end_date, string comment, string id_assign) {
         QComboBox *combobox = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2");
         int index = combobox->currentIndex();
         if (!allAssign[index].isNull() && allAssign[index].isObject()) {

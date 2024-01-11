@@ -38,15 +38,13 @@ void TaskForm::on_buttonBox_accepted()
     QString comment = ui->textEdit->toPlainText();
     QString idAssign = ui->comboBox_2->currentText();
 
-    // Convert values to string
-    string nameStr = name.toStdString();
-    string statusStr = status.toStdString();
+    string nameStr = name.isEmpty() ? "" : name.toStdString();
+    string statusStr = status.isEmpty() ? "" : status.toStdString();
     string startDateStr = startDate.toString("yyyy-MM-dd").toStdString();
     string endDateStr = endDate.toString("yyyy-MM-dd").toStdString();
-    string commentStr = comment.toStdString();
-    string idAssignStr = idAssign.toStdString();
+    string commentStr = comment.isEmpty() ? "" : comment.toStdString();
+    string idAssignStr = idAssign.isEmpty() ? "" : idAssign.toStdString();
 
-    // Emit the signal with the converted values
     emit handleAccept(nameStr, statusStr, startDateStr, endDateStr, commentStr, idAssignStr);
 }
 
