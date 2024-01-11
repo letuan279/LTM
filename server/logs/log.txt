@@ -56,3 +56,23 @@
 [2024-01-11 09:44:45][SERVER] {"data":"","message":"Permission denied","success":0}
 [2024-01-11 11:06:56][CLIENT][login] {"password":"1234","username":"quan.va"}
 [2024-01-11 11:06:56][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
+[2024-01-11 11:10:04][CLIENT][login] {"password":"1234","username":"quan.va"}
+[2024-01-11 11:10:04][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
+[2024-01-11 11:10:10][CLIENT][logout] {"session":""}
+[2024-01-11 11:10:10][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 11:10:27][CLIENT][login] {"password":"1234","username":"admin"}
+[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","password":"1234","session":"8kspw","username":"admin"},"message":"Login successfull","success":1}
+[2024-01-11 11:10:27][CLIENT][project/all] {"session":"8kspw"}
+[2024-01-11 11:10:27][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
+[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 11:10:30][CLIENT][member/get] {"id_project":"2frwa","session":"8kspw"}
+[2024-01-11 11:10:30][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
+[2024-01-11 11:10:30][CLIENT][task/get] {"id_project":"2frwa","session":"8kspw"}
+[2024-01-11 11:10:30][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 11:10:39][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"8kspw"}
+[2024-01-11 11:10:39][SERVER] {"data":[],"message":"OK","success":1}
