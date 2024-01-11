@@ -216,3 +216,42 @@ string getUserToAddTask(const string& id_user, const string& id_project) {
 
     return response.dump();
 }
+
+int deleteSession(const string& id_user) {
+    ifstream file(USER_FILE);
+    if (!file) {
+        return 0;
+    }
+
+    vector<string> lines;
+    string line;
+    while (getline(file, line)) {
+        lines.push_back(line);
+    }
+
+    for (string& line : lines) {
+        istringstream iss(line);
+        string id, username, password, session;
+        getline(iss, id, ',');
+        getline(iss, username, ',');
+        getline(iss, password, ',');
+        getline(iss, session, ',');
+
+        if (id == id_user) {
+            session = "";
+            ostringstream oss;
+            oss << id << "," << username << "," << password << "," << session;
+            line = oss.str();
+            break;
+        }
+    }
+
+    ofstream outFile(USER_FILE);
+    if (!outFile) {
+        return 0;
+    }
+
+    copy(lines.begin(), lines.end(), ostream_iterator<string>(outFile, "\n"));
+
+    return 1;
+}

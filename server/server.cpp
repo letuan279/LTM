@@ -490,7 +490,7 @@ string handle_member_add_request(const json& data) {
         return R"({"success": 0,"message": "User not found","data": []})";
     }
 
-    if (!isOwnerProject(idUser, idProject)) return init_response(false, "Permission denied", "");
+    if (!isOwnerProject(idUserRequest, idProject)) return init_response(false, "Permission denied", "");
 
     ifstream file(MEMBER_FILE);
     string line;

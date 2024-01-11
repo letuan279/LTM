@@ -76,7 +76,7 @@ bool isOwnerProject(const string& idUser, const string& idProject) {
         getline(ss, name, ',');
         getline(ss, id_owner, ',');
 
-        if (idUser == id_owner && idProject == id) {
+        if (id == idProject && id_owner == idUser) {
             prj_file.close();
             return true;
         }

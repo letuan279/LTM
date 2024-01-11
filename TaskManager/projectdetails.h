@@ -19,6 +19,7 @@ signals:
     void widgetShown();
     void widgetChanged(const int& index);
     void doubleClick(const QString& id);
+    void closeApp();
 
 protected:
     void showEvent(QShowEvent *event) override;
