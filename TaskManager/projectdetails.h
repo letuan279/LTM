@@ -18,12 +18,15 @@ public:
 signals:
     void widgetShown();
     void widgetChanged(const int& index);
+    void doubleClick(const QString& id);
 
 protected:
     void showEvent(QShowEvent *event) override;
 
 private slots:
     void on_project_stackwidget_currentChanged(int arg1);
+
+    void on_task_table_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::ProjectDetails *ui;

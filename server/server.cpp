@@ -52,6 +52,7 @@ string handle_member_delete_request(const json& data);
 
 string handle_task_get_request(const json& data);
 string handle_task_create_request(const json& data);
+string handle_task_update_request(const json& data);
 string handle_task_assign_request(const json& data);
 string handle_task_update_status_request(const json& data);
 string handle_task_add_comment_request(const json& data);
@@ -144,6 +145,11 @@ void register_routes() {
     
     router["task/create"] = [](int client_socket, const json& data) {
         string response = handle_task_create_request(data);
+        send_response(client_socket, response);
+    };
+
+    router["task/update"] = [](int client_socket, const json& data) {
+        string response = handle_task_update_request(data);
         send_response(client_socket, response);
     };
 
@@ -641,6 +647,39 @@ string handle_task_create_request(const json& data) {
     if (!isOwnerProject(id_user, id_project)) return init_response(false, "Permission denied", "");
 
     return createNewTask(id_user, id_project, name, status, id_assign, comment, start_date, end_date);
+}
+
+string handle_task_update_request(const json& data) {
+    string session = data["session"];
+    string id_task = data["id_task"];
+    string id_project = data["id_project"];
+    string name = data["name"];
+    string status = data["status"];
+    string start_date = data["start_date"];
+    string end_date = data["end_date"];
+    string comment = data["comment"];
+    string id_assign = data["id_assign"];
+
+    if (session.empty()) return init_response(false, "Field session must not be empty", "");
+    if (id_task.empty()) return init_response(false, "Field id_task must not be empty", "");
+    if (id_project.empty()) return init_response(false, "Field id_project must not be empty", "");
+    if (name.empty()) return init_response(false, "Field name must not be empty", "");
+    if (status.empty()) status = "TODO";
+    if (start_date.empty()) return init_response(false, "Field start_date must not be empty", "");
+    if (end_date.empty()) return init_response(false, "Field end_date must not be empty", "");
+    if (comment.empty()) comment = "";
+    if (id_assign.empty()) id_assign = "";
+
+    if(!compareDates(start_date, end_date)) {
+        return init_response(false, "start_date must be earlier than end_date", "");
+    }
+
+    string id_user = getIdUserBySession(session);
+
+    if (id_user.empty()) return init_response(false, "User not found", "");
+    if (!isOwnerProject(id_user, id_project)) return init_response(false, "Permission denied", "");
+
+    return updateTask(id_task, id_user, id_project, name, status, id_assign, comment, start_date, end_date);
 }
 
 string handle_task_assign_request(const json& data) {

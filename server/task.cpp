@@ -70,6 +70,59 @@ string createNewTask(const string id_user, const string id_project, const string
     return init_response(true, "Created task with id: " + newTaskId, "");
 }
 
+string updateTask(const string id_task, const string id_user, const string new_id_project, const string new_name, const string new_status, const string new_id_assign, const string new_comment, const string new_start_date, const string new_end_date) {
+    ifstream input_file(TASK_FILE);
+    if (!input_file) {
+        return init_response(false, "[ERROR] Failed to open " + string(TASK_FILE), "");
+    }
+
+    vector<Task> tasks;
+    string line;
+
+    while (getline(input_file, line)) {
+        istringstream iss(line);
+        string id, id_project, id_manager, name, status, id_assign, comment, start_date, end_date;
+
+        if (getline(iss, id, ',') &&
+            getline(iss, id_project, ',') &&
+            getline(iss, id_manager, ',') &&
+            getline(iss, name, ',') &&
+            getline(iss, status, ',') &&
+            getline(iss, id_assign, ',') &&
+            getline(iss, comment, ',') &&
+            getline(iss, start_date, ',') &&
+            getline(iss, end_date, ',')) {
+
+            if (id_task == id) {
+                id_project = new_id_project;
+                id_manager = id_user;
+                name = new_name;
+                status = new_status;
+                id_assign = new_id_assign;
+                comment = new_comment;
+                start_date = new_start_date;
+                end_date = new_end_date;
+            }
+            tasks.push_back({id, id_project, id_user, name, status, id_assign, comment, start_date, end_date});
+        }
+    }
+
+    input_file.close();
+    
+    ofstream taskFile(TASK_FILE, ios::app);
+    if (!taskFile) {
+        return init_response(false, "[ERROR] Failed to open " + string(TASK_FILE), "");
+    }
+
+    // id,id_project,name,status,id_assign,comment,start_date,end_date
+    for (const auto& task : tasks) {
+        taskFile << task.id << "," << task.id_project << "," << task.id_manager << "," << task.name << "," << task.status << "," << task.id_assign << "," << task.comment << "," << task.start_date << "," << task.end_date << endl;
+    }
+    taskFile.close();
+
+    return init_response(true, "Update task with id: " + id_task, "");
+}
+
 string assignTaskToUser(const string& id_task, const string& id_assign_new) {
     ifstream input_file(TASK_FILE);
     if (!input_file) {

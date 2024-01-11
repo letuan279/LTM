@@ -471,12 +471,17 @@ int main(int argc, char *argv[])
     });
 
     // Add task
+    bool isEdit = false;
+    string editTaskId;
     QJsonArray allAssign;
     QObject::connect(addTaskBtn, &QPushButton::clicked, [&]() {
         taskCreateFormPopup.show();
         QComboBox *assignCombobox = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2");
         assignCombobox->clear();
         assignCombobox->clearEditText();
+
+        isEdit = false;
+        editTaskId.clear();
 
         std::string user_res = performGetUserToAddTask(acc.session, currProject.id);
         QString jsonString = QString::fromStdString(user_res);
@@ -498,6 +503,74 @@ int main(int argc, char *argv[])
                 }
             }
         }
+
+        taskCreateFormPopup.findChild<QLineEdit*>("lineEdit")->clear();
+        taskCreateFormPopup.findChild<QComboBox*>("comboBox")->clearEditText();
+        taskCreateFormPopup.findChild<QDateEdit*>("dateEdit")->setDate(QDate::currentDate());
+        taskCreateFormPopup.findChild<QDateEdit*>("dateEdit_2")->setDate(QDate::currentDate());
+        taskCreateFormPopup.findChild<QComboBox*>("comboBox_2")->clearEditText();
+        taskCreateFormPopup.findChild<QTextEdit*>("textEdit")->clear();
+    });
+
+    QObject::connect(&projectDetailsScreen, &ProjectDetails::doubleClick, [&](const QString& id) {
+        auto it = std::find_if(currTask.begin(), currTask.end(), [&](const Task& p) {
+            return p.id == id.toStdString();
+        });
+
+        if (it != currTask.end()) {
+            taskCreateFormPopup.show();
+            QComboBox *assignCombobox = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2");
+            assignCombobox->clear();
+            assignCombobox->clearEditText();
+
+            isEdit = true;
+            editTaskId = it->id;
+
+            std::string user_res = performGetUserToAddTask(acc.session, it->id);
+            QString jsonString = QString::fromStdString(user_res);
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject jsonObj = jsonDoc.object();
+                int success = jsonObj["success"].toInt();
+                QString message = jsonObj["message"].toString();
+                if (!success) {
+                    notify(success, message.toStdString());
+                } else {
+                    QJsonArray userArr = jsonObj["data"].toArray();
+                    qDebug() << "Total: " << userArr.size();
+                    assignCombobox->addItem("");
+                    for (int i = 0; i < userArr.size(); i++) {
+                        QJsonObject user = userArr[i].toObject();
+                        allAssign.insert(i+1, user);
+                        assignCombobox->addItem(user["username"].toString());
+                    }
+                }
+            }
+
+            taskCreateFormPopup.findChild<QLineEdit*>("lineEdit")->setText(QString::fromStdString(it->name));
+            int indexStatus = taskCreateFormPopup.findChild<QComboBox*>("comboBox")->findText(QString::fromStdString(it->status));
+            taskCreateFormPopup.findChild<QComboBox*>("comboBox")->setCurrentIndex(indexStatus);
+            taskCreateFormPopup.findChild<QDateEdit*>("dateEdit")->setDate(QDate::fromString(QString::fromStdString(it->start_date)));
+            taskCreateFormPopup.findChild<QDateEdit*>("dateEdit_2")->setDate(QDate::fromString(QString::fromStdString(it->end_date)));
+            QJsonObject assigner;
+            for (const QJsonValue& jsonValue : allAssign) {
+                if (jsonValue.isObject()) {
+                    QJsonObject jsonObject = jsonValue.toObject();
+                    // Iterate over the key-value pairs in the jsonObject
+                    for (auto ij = jsonObject.begin(); ij != jsonObject.end(); ++ij) {
+                        const QJsonValue& value = ij.value();
+                        if (value.isString() && value.toString().toStdString() == it->id_assign) {
+                            // Value found!
+                            assigner = jsonObject;
+                            break;
+                        }
+                    }
+                }
+            }
+            int indexAssign = taskCreateFormPopup.findChild<QComboBox*>("comboBox_2")->findText(assigner["username"].toString());
+            taskCreateFormPopup.findChild<QComboBox*>("comboBox_2")->setCurrentIndex(indexAssign);
+            taskCreateFormPopup.findChild<QTextEdit*>("textEdit")->setText(QString::fromStdString(it->comment));
+        }
     });
 
     QObject::connect(&taskCreateFormPopup, &TaskForm::handleAccept, [&](const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign) {
@@ -505,8 +578,12 @@ int main(int argc, char *argv[])
         int index = combobox->currentIndex();
         if (!allAssign[index].isNull() && allAssign[index].isObject()) {
             QJsonObject assign = allAssign[index].toObject();
-            std::string create_res = performAddTask(acc.session, currProject.id, name, status, start_date, end_date, comment, assign["id"].toString().toStdString());
-            QString jsonString = QString::fromStdString(create_res);
+            std::string response;
+            if (!isEdit)
+                response = performAddTask(acc.session, currProject.id, name, status, start_date, end_date, comment, assign["id"].toString().toStdString());
+            else
+                response = performUpdateTask(acc.session, editTaskId, currProject.id, name, status, start_date, end_date, comment, assign["id"].toString().toStdString());
+            QString jsonString = QString::fromStdString(response);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
             if (!jsonDoc.isNull() && jsonDoc.isObject()) {
                 QJsonObject jsonObj = jsonDoc.object();

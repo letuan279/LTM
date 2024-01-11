@@ -1,0 +1,58 @@
+[2024-01-11 09:37:12][CLIENT][login] {"password":"1234","username":"admin"}
+[2024-01-11 09:37:12][SERVER] {"data":"","message":"[ERROR]: User not found!","success":0}
+[2024-01-11 09:37:39][CLIENT][login] {"password":"1234","username":"quan.va"}
+[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","password":"1234","session":"6XxfL","username":"quan.va"},"message":"Login successfull","success":1}
+[2024-01-11 09:37:39][CLIENT][project/all] {"session":"6XxfL"}
+[2024-01-11 09:37:39][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"}],"message":"Successful","success":1}
+[2024-01-11 09:37:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:37:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:37:51][CLIENT][project/create] {"name":"prj demo","session":"6XxfL"}
+[2024-01-11 09:37:51][SERVER] {"data":"","message":"Created project with id: mAFS8","success":1}
+[2024-01-11 09:37:51][CLIENT][project/all] {"session":"6XxfL"}
+[2024-01-11 09:37:51][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
+[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:38:05][CLIENT][member/get] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:05][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
+[2024-01-11 09:38:05][CLIENT][task/get] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:05][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 09:38:10][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:10][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 09:38:16][CLIENT][member/add] {"id_project":"2frwa","id_user":"123ml","session":"6XxfL"}
+[2024-01-11 09:38:16][SERVER] {"data":"","message":"Permission denied","success":0}
+[2024-01-11 09:38:35][CLIENT][member/get] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:35][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
+[2024-01-11 09:38:35][CLIENT][task/get] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:35][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 09:38:43][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"6XxfL"}
+[2024-01-11 09:38:43][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 09:38:47][CLIENT][member/add] {"id_project":"2frwa","id_user":"asd23","session":"6XxfL"}
+[2024-01-11 09:38:47][SERVER] {"data":"","message":"Permission denied","success":0}
+[2024-01-11 09:43:59][CLIENT][login] {"password":"1234","username":"quan.va"}
+[2024-01-11 09:43:59][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
+[2024-01-11 09:44:24][CLIENT][login] {"password":"1234","username":"quan.va"}
+[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","password":"1234","session":"L9DNs","username":"quan.va"},"message":"Login successfull","success":1}
+[2024-01-11 09:44:24][CLIENT][project/all] {"session":"L9DNs"}
+[2024-01-11 09:44:24][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
+[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
+[2024-01-11 09:44:39][CLIENT][member/get] {"id_project":"2frwa","session":"L9DNs"}
+[2024-01-11 09:44:39][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
+[2024-01-11 09:44:39][CLIENT][task/get] {"id_project":"2frwa","session":"L9DNs"}
+[2024-01-11 09:44:39][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 09:44:43][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"L9DNs"}
+[2024-01-11 09:44:43][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 09:44:45][CLIENT][member/add] {"id_project":"2frwa","id_user":"asd23","session":"L9DNs"}
+[2024-01-11 09:44:45][SERVER] {"data":"","message":"Permission denied","success":0}
+[2024-01-11 11:06:56][CLIENT][login] {"password":"1234","username":"quan.va"}
+[2024-01-11 11:06:56][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}

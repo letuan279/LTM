@@ -80,7 +80,7 @@
       <item>
        <widget class="QStackedWidget" name="project_stackwidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="member">
          <widget class="QTableView" name="member_table">

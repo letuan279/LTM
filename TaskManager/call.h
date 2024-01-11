@@ -142,6 +142,22 @@ string performAddTask(const string& session, const string& id_project, const str
     return res;
 }
 
+string performUpdateTask(const string& session, const string& id_task, const string& id_project, const string& name, const string& status, const string& start_date, const string& end_date, const string& comment, const string& id_assign)
+{
+    string message = R"({"route": "task/update", "data": {"session": ")" + session +
+                     R"(", "id_task": ")" + id_task +
+                     R"(", "id_project": ")" + id_project +
+                     R"(", "name": ")" + name +
+                     R"(", "status": ")" + status +
+                     R"(", "start_date": ")" + start_date +
+                     R"(", "end_date": ")" + end_date +
+                     R"(", "comment": ")" + comment +
+                     R"(", "id_assign": ")" + id_assign + R"("}})";
+
+    string res = call(message);
+    return res;
+}
+
 string performGetTaskList(const string& session, const string& id_project)
 {
     string message = R"({"route": "task/get", "data": {"session": ")" + session + R"(", "id_project": ")" + id_project + "\"}}";
