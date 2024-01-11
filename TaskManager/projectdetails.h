@@ -18,6 +18,7 @@ public:
 signals:
     void widgetShown();
     void widgetChanged(const int& index);
+    void closeApp();
 
 protected:
     void showEvent(QShowEvent *event) override;

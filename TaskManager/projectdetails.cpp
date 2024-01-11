@@ -23,4 +23,3 @@ void ProjectDetails::on_project_stackwidget_currentChanged(int arg1)
 {
     emit widgetChanged(arg1);
 }
-

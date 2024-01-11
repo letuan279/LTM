@@ -73,7 +73,7 @@ string call(string message, int port) {
         return "";
     }
 
-    constexpr int bufferSize = 1024;
+    constexpr int bufferSize = 10000;
     char buffer[bufferSize];
     ssize_t receivedBytes = recv(sockfd, buffer, bufferSize - 1, 0);
     if (receivedBytes == -1) {
@@ -281,14 +281,16 @@ int main()
 
 void catch_ctrl_c(int signal) 
 {
-    cout << "ctrl_c" << endl;
-	char str[MAX_LEN]="#exit";
-	send(client_socket,str,sizeof(str),0);
-	exit_flag=true;
-	t_send.detach();
-	t_recv.detach();
-	close(client_socket);
-	exit(signal);
+    if(signal == SIGINT){
+        cout << "Ctrl+C signal received." << endl;
+        char str[MAX_LEN]="#exit";
+        send(client_socket,str,sizeof(str),0);
+        exit_flag=true;
+        t_send.detach();
+        t_recv.detach();
+        close(client_socket);
+        exit(signal);
+    }
 }
 
 int eraseText(int cnt)
@@ -305,7 +307,6 @@ void send_message(int client_socket)
 {
 	while(1)
 	{
-		cout << "Enter message : ";
 		char str[MAX_LEN];
         cin.clear();
 		cin.getline(str,MAX_LEN);
@@ -325,11 +326,10 @@ void recv_message(int client_socket)
 {
 	while(1)
 	{
-        eraseText(16);
 		if(exit_flag)
 			return;
 
-        char buffer[1024];
+        char buffer[10000];
         ssize_t receivedBytes = recv(client_socket, buffer, bufferSize - 1, 0);
         if (receivedBytes == -1) {
             continue;
@@ -340,7 +340,5 @@ void recv_message(int client_socket)
         string response(buffer);
         eraseText(16);
         cout << formatRecv(response) << endl;
-        cout << "Enter message : ";
-        fflush(stdout);
 	}	
 }

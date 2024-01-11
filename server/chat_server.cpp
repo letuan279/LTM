@@ -36,6 +36,7 @@ void handle_client(int client_socket, string id_user, string id_project);
 int main()
 {
     int server_socket;
+    int port = 8081;
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
         perror("socket: ");
@@ -44,7 +45,7 @@ int main()
 
     struct sockaddr_in server;
     server.sin_family = AF_INET;
-    server.sin_port = htons(8081);
+    server.sin_port = htons(port);
     server.sin_addr.s_addr = INADDR_ANY;
     bzero(&server.sin_zero, sizeof(server.sin_zero));
 
@@ -63,6 +64,8 @@ int main()
     struct sockaddr_in client;
     int client_socket;
     unsigned int len = sizeof(sockaddr_in);
+
+    cout << "Server is running on port " << port << endl;
 
     while (1)
     {
@@ -142,6 +145,10 @@ void end_connection(string id_user)
             close(chatMembers[i].socket);
             break;
         }
+    }
+    int result = deleteSession(id_user);
+    if(!result) {
+        cout << "Cannot logout!" << endl;
     }
 }
 

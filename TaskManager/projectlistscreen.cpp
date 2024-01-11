@@ -30,4 +30,3 @@ void ProjectListScreen::on_logout_btn_clicked()
 {
     emit logout();
 }
-
