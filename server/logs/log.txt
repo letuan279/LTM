@@ -1,294 +1,242 @@
-[2024-01-11 09:37:12][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 09:37:12][SERVER] {"data":"","message":"[ERROR]: User not found!","success":0}
-[2024-01-11 09:37:39][CLIENT][login] {"password":"1234","username":"quan.va"}
-[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","password":"1234","session":"6XxfL","username":"quan.va"},"message":"Login successfull","success":1}
-[2024-01-11 09:37:39][CLIENT][project/all] {"session":"6XxfL"}
-[2024-01-11 09:37:39][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"}],"message":"Successful","success":1}
-[2024-01-11 09:37:39][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:37:39][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:37:39][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:37:51][CLIENT][project/create] {"name":"prj demo","session":"6XxfL"}
-[2024-01-11 09:37:51][SERVER] {"data":"","message":"Created project with id: mAFS8","success":1}
-[2024-01-11 09:37:51][CLIENT][project/all] {"session":"6XxfL"}
-[2024-01-11 09:37:51][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:37:51][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:37:51][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:38:05][CLIENT][member/get] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:05][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
-[2024-01-11 09:38:05][CLIENT][task/get] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:05][SERVER] {"data":[],"message":"Get tasks successed","success":1}
-[2024-01-11 09:38:10][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:10][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
-[2024-01-11 09:38:16][CLIENT][member/add] {"id_project":"2frwa","id_user":"123ml","session":"6XxfL"}
-[2024-01-11 09:38:16][SERVER] {"data":"","message":"Permission denied","success":0}
-[2024-01-11 09:38:35][CLIENT][member/get] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:35][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
-[2024-01-11 09:38:35][CLIENT][task/get] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:35][SERVER] {"data":[],"message":"Get tasks successed","success":1}
-[2024-01-11 09:38:43][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"6XxfL"}
-[2024-01-11 09:38:43][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
-[2024-01-11 09:38:47][CLIENT][member/add] {"id_project":"2frwa","id_user":"asd23","session":"6XxfL"}
-[2024-01-11 09:38:47][SERVER] {"data":"","message":"Permission denied","success":0}
-[2024-01-11 09:43:59][CLIENT][login] {"password":"1234","username":"quan.va"}
-[2024-01-11 09:43:59][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
-[2024-01-11 09:44:24][CLIENT][login] {"password":"1234","username":"quan.va"}
-[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","password":"1234","session":"L9DNs","username":"quan.va"},"message":"Login successfull","success":1}
-[2024-01-11 09:44:24][CLIENT][project/all] {"session":"L9DNs"}
-[2024-01-11 09:44:24][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:44:24][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 09:44:24][SERVER] {"data":{"id":"abcde","username":"quan.va"},"message":"User found","success":1}
-[2024-01-11 09:44:39][CLIENT][member/get] {"id_project":"2frwa","session":"L9DNs"}
-[2024-01-11 09:44:39][SERVER] {"data":[{"id":"abcde","username":"quan.va"}],"message":"Successful","success":1}
-[2024-01-11 09:44:39][CLIENT][task/get] {"id_project":"2frwa","session":"L9DNs"}
-[2024-01-11 09:44:39][SERVER] {"data":[],"message":"Get tasks successed","success":1}
-[2024-01-11 09:44:43][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"L9DNs"}
-[2024-01-11 09:44:43][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
-[2024-01-11 09:44:45][CLIENT][member/add] {"id_project":"2frwa","id_user":"asd23","session":"L9DNs"}
-[2024-01-11 09:44:45][SERVER] {"data":"","message":"Permission denied","success":0}
-[2024-01-11 11:06:56][CLIENT][login] {"password":"1234","username":"quan.va"}
-[2024-01-11 11:06:56][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
-[2024-01-11 11:10:04][CLIENT][login] {"password":"1234","username":"quan.va"}
-[2024-01-11 11:10:04][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
-[2024-01-11 11:10:10][CLIENT][logout] {"session":""}
-[2024-01-11 11:10:10][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:10:27][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","password":"1234","session":"8kspw","username":"admin"},"message":"Login successfull","success":1}
-[2024-01-11 11:10:27][CLIENT][project/all] {"session":"8kspw"}
-[2024-01-11 11:10:27][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:10:27][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:10:27][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:10:30][CLIENT][member/get] {"id_project":"2frwa","session":"8kspw"}
-[2024-01-11 11:10:30][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
-[2024-01-11 11:10:30][CLIENT][task/get] {"id_project":"2frwa","session":"8kspw"}
-[2024-01-11 11:10:30][SERVER] {"data":[],"message":"Get tasks successed","success":1}
-[2024-01-11 11:10:39][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"8kspw"}
-[2024-01-11 11:10:39][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:14:46][CLIENT][logout] {"session":""}
-[2024-01-11 11:14:46][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:15:08][CLIENT][login] {"password":"1234","username":"thang"}
-[2024-01-11 11:15:08][SERVER] {"data":{"id":"123ml","password":"1234","session":"G5YnX","username":"thang"},"message":"Login successfull","success":1}
-[2024-01-11 11:15:08][CLIENT][project/all] {"session":"G5YnX"}
-[2024-01-11 11:15:08][SERVER] {"data":[{"id":"123sa","id_owner":"asd23","name":"Project 1"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"}],"message":"Successful","success":1}
-[2024-01-11 11:15:08][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:15:08][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:15:08][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:15:08][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:15:10][CLIENT][member/get] {"id_project":"OlDHv","session":"G5YnX"}
-[2024-01-11 11:15:10][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
-[2024-01-11 11:15:10][CLIENT][task/get] {"id_project":"OlDHv","session":"G5YnX"}
-[2024-01-11 11:15:10][SERVER] {"data":[{"comment":"","end_date":"2024/2/3","id":"ipYi7","id_assign":"","id_manager":"abcde","id_project":"OlDHv","name":"Task moi","start_date":"2024/1/1","status":"TODO"},{"comment":"","end_date":"2024/2/3","id":"hhH6m","id_assign":"123ml","id_manager":"abcde","id_project":"OlDHv","name":"Cong viec 1","start_date":"2024/1/1","status":"PROCESS"},{"comment":"Sample comment","end_date":"2024/2/3","id":"9ChM9","id_assign":"123ml","id_manager":"abcde","id_project":"OlDHv","name":"Task_123","start_date":"2024/1/1","status":"DONE"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:15:10][CLIENT][user/id] {"id":""}
-[2024-01-11 11:15:10][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:15:10][CLIENT][user/id] {"id":"123ml"}
-[2024-01-11 11:15:10][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
-[2024-01-11 11:15:10][CLIENT][user/id] {"id":"123ml"}
-[2024-01-11 11:15:10][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
-[2024-01-11 11:15:12][CLIENT][user/get-to-add-task] {"id_project":"OlDHv","session":"G5YnX"}
-[2024-01-11 11:15:12][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"OK","success":1}
-[2024-01-11 11:15:59][CLIENT][user/get-to-add-task] {"id_project":"OlDHv","session":"G5YnX"}
-[2024-01-11 11:15:59][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"OK","success":1}
-[2024-01-11 11:16:11][CLIENT][task/create] {"comment":"","end_date":"2024-01-11","id_assign":"abcde","id_project":"OlDHv","name":"task 555","session":"G5YnX","start_date":"2024-01-11","status":"TODO"}
-[2024-01-11 11:16:11][SERVER] {"data":"","message":"Permission denied","success":0}
-[2024-01-11 11:16:31][CLIENT][logout] {"session":"G5YnX"}
-[2024-01-11 11:16:31][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:16:41][CLIENT][login] {"password":"1234","username":"thang"}
-[2024-01-11 11:16:41][SERVER] {"data":{"id":"123ml","password":"1234","session":"Q5PkO","username":"thang"},"message":"Login successfull","success":1}
-[2024-01-11 11:16:41][CLIENT][project/all] {"session":"Q5PkO"}
-[2024-01-11 11:16:41][SERVER] {"data":[{"id":"123sa","id_owner":"asd23","name":"Project 1"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"}],"message":"Successful","success":1}
-[2024-01-11 11:16:41][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:16:41][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:16:41][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:16:41][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:17:10][CLIENT][logout] {"session":"Q5PkO"}
-[2024-01-11 11:17:10][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:17:14][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 11:17:14][SERVER] {"data":"","message":"[ERROR]: User already logined","success":0}
-[2024-01-11 11:17:22][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 11:17:22][SERVER] {"data":{"id":"abcde","password":"1234","session":"uq9No","username":"admin"},"message":"Login successfull","success":1}
-[2024-01-11 11:17:22][CLIENT][project/all] {"session":"uq9No"}
-[2024-01-11 11:17:22][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 11:17:22][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:17:22][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:17:22][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:17:22][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:17:22][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:17:22][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:17:27][CLIENT][member/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:17:27][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
-[2024-01-11 11:17:27][CLIENT][task/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:17:27][SERVER] {"data":[],"message":"Get tasks successed","success":1}
-[2024-01-11 11:17:28][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:17:28][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:20:32][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:20:32][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
-[2024-01-11 11:20:33][CLIENT][member/add] {"id_project":"2frwa","id_user":"asd23","session":"uq9No"}
-[2024-01-11 11:20:33][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"}],"message":"Member added successfully","success":1}
-[2024-01-11 11:20:33][CLIENT][member/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:20:33][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"}],"message":"Successful","success":1}
-[2024-01-11 11:20:36][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:20:36][SERVER] {"data":[{"id":"asd23","username":"tuan"}],"message":"OK","success":1}
-[2024-01-11 11:20:40][CLIENT][task/create] {"comment":"awdsadsa","end_date":"2024-01-11","id_assign":"asd23","id_project":"2frwa","name":"asdawdas","session":"uq9No","start_date":"2024-01-11","status":"TODO"}
-[2024-01-11 11:20:40][SERVER] {"data":"","message":"Created task with id: j9btz","success":1}
-[2024-01-11 11:20:40][CLIENT][task/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:20:40][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:20:40][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:20:40][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:21:04][CLIENT][user/get-to-add-task] {"id_project":"j9btz","session":"uq9No"}
-[2024-01-11 11:21:04][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:21:19][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:21:19][SERVER] {"data":[{"id":"asd23","username":"tuan"}],"message":"OK","success":1}
-[2024-01-11 11:21:23][CLIENT][task/create] {"comment":"adwda","end_date":"2024-01-11","id_assign":"asd23","id_project":"2frwa","name":"sdasdw","session":"uq9No","start_date":"2024-01-11","status":"TODO"}
-[2024-01-11 11:21:23][SERVER] {"data":"","message":"Created task with id: IE00I","success":1}
-[2024-01-11 11:21:23][CLIENT][task/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:21:23][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:21:23][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:21:23][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:21:23][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:21:23][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:21:34][CLIENT][user/get-to-add-task] {"id_project":"j9btz","session":"uq9No"}
-[2024-01-11 11:21:34][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:21:47][CLIENT][user/get-to-add-member] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:21:47][SERVER] {"data":[{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
-[2024-01-11 11:21:48][CLIENT][member/add] {"id_project":"2frwa","id_user":"sd25w","session":"uq9No"}
-[2024-01-11 11:21:48][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Member added successfully","success":1}
-[2024-01-11 11:21:48][CLIENT][member/get] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:21:48][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
-[2024-01-11 11:21:49][CLIENT][user/get-to-add-task] {"id_project":"j9btz","session":"uq9No"}
-[2024-01-11 11:21:49][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:22:04][CLIENT][user/get-to-add-task] {"id_project":"j9btz","session":"uq9No"}
-[2024-01-11 11:22:04][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:22:55][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"uq9No"}
-[2024-01-11 11:22:55][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:24:57][CLIENT][logout] {"session":"uq9No"}
-[2024-01-11 11:24:57][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:25:02][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 11:25:02][SERVER] {"data":{"id":"abcde","password":"1234","session":"g5RAf","username":"admin"},"message":"Login successfull","success":1}
-[2024-01-11 11:25:02][CLIENT][project/all] {"session":"g5RAf"}
-[2024-01-11 11:25:02][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 11:25:02][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:25:02][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:25:02][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:25:02][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:25:02][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:25:02][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:25:04][CLIENT][member/get] {"id_project":"2frwa","session":"g5RAf"}
-[2024-01-11 11:25:04][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
-[2024-01-11 11:25:04][CLIENT][task/get] {"id_project":"2frwa","session":"g5RAf"}
-[2024-01-11 11:25:04][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:25:04][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:25:04][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:25:04][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:25:04][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:26:09][CLIENT][member/get] {"id_project":"2frwa","session":"g5RAf"}
-[2024-01-11 11:26:09][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
-[2024-01-11 11:26:10][CLIENT][task/get] {"id_project":"2frwa","session":"g5RAf"}
-[2024-01-11 11:26:10][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:26:10][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:26:10][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:26:10][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:26:10][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:26:23][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"g5RAf"}
-[2024-01-11 11:26:23][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:29:50][CLIENT][logout] {"session":"g5RAf"}
-[2024-01-11 11:29:50][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:29:55][CLIENT][logout] {"session":"g5RAf"}
-[2024-01-11 11:29:55][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:13][CLIENT][login] {"password":"1234","username":"admin"}
-[2024-01-11 11:30:13][SERVER] {"data":{"id":"abcde","password":"1234","session":"XdHq2","username":"admin"},"message":"Login successfull","success":1}
-[2024-01-11 11:30:13][CLIENT][project/all] {"session":"XdHq2"}
-[2024-01-11 11:30:13][SERVER] {"data":[{"id":"2frwa","id_owner":"abcde","name":"Project 2"},{"id":"OlDHv","id_owner":"abcde","name":"Project 3"},{"id":"mAFS8","id_owner":"abcde","name":"prj demo"}],"message":"Successful","success":1}
-[2024-01-11 11:30:13][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:30:13][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:30:13][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:30:13][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:30:13][CLIENT][user/id] {"id":"abcde"}
-[2024-01-11 11:30:13][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
-[2024-01-11 11:30:16][CLIENT][member/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:30:16][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
-[2024-01-11 11:30:16][CLIENT][task/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:30:16][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:30:16][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:30:16][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:16][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:30:16][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:18][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:30:18][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:30:35][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:30:35][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:30:55][CLIENT][task/create] {"comment":"hello","end_date":"2024-01-11","id_assign":"sd25w","id_project":"2frwa","name":"test task","session":"XdHq2","start_date":"2024-01-10","status":"TODO"}
-[2024-01-11 11:30:55][SERVER] {"data":"","message":"Created task with id: BgAY2","success":1}
-[2024-01-11 11:30:55][CLIENT][task/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:30:55][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"},{"comment":"hello","end_date":"2024-01-11","id":"BgAY2","id_assign":"sd25w","id_manager":"abcde","id_project":"2frwa","name":"test task","start_date":"2024-01-10","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:30:55][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:30:55][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:55][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:30:55][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:55][CLIENT][user/id] {"id":"sd25w"}
-[2024-01-11 11:30:55][SERVER] {"data":"","message":"User not found","success":0}
-[2024-01-11 11:30:58][CLIENT][user/get-to-add-task] {"id_project":"BgAY2","session":"XdHq2"}
-[2024-01-11 11:30:58][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:33:40][CLIENT][user/get-to-add-task] {"id_project":"BgAY2","session":"XdHq2"}
-[2024-01-11 11:33:40][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:33:43][CLIENT][user/get-to-add-task] {"id_project":"BgAY2","session":"XdHq2"}
-[2024-01-11 11:33:43][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:36:24][CLIENT][member/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:24][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
-[2024-01-11 11:36:24][CLIENT][task/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:24][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"},{"comment":"hello","end_date":"2024-01-11","id":"BgAY2","id_assign":"sd25w","id_manager":"abcde","id_project":"2frwa","name":"test task","start_date":"2024-01-10","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:36:24][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:24][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:24][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:24][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:24][CLIENT][user/id] {"id":"sd25w"}
-[2024-01-11 11:36:24][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
-[2024-01-11 11:36:27][CLIENT][user/get-to-add-task] {"id_project":"j9btz","session":"XdHq2"}
-[2024-01-11 11:36:27][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:36:30][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:30][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:36:44][CLIENT][task/create] {"comment":"","end_date":"2024-01-11","id_assign":"asd23","id_project":"2frwa","name":"test task 2","session":"XdHq2","start_date":"2024-01-10","status":"TODO"}
-[2024-01-11 11:36:44][SERVER] {"data":"","message":"Created task with id: LuUnU","success":1}
-[2024-01-11 11:36:44][CLIENT][task/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:44][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"},{"comment":"hello","end_date":"2024-01-11","id":"BgAY2","id_assign":"sd25w","id_manager":"abcde","id_project":"2frwa","name":"test task","start_date":"2024-01-10","status":"TODO"},{"comment":"","end_date":"2024-01-11","id":"LuUnU","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"test task 2","start_date":"2024-01-10","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:36:44][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:44][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:44][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:44][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:44][CLIENT][user/id] {"id":"sd25w"}
-[2024-01-11 11:36:44][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
-[2024-01-11 11:36:44][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:44][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:48][CLIENT][user/get-to-add-task] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:48][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"OK","success":1}
-[2024-01-11 11:36:57][CLIENT][task/create] {"comment":"","end_date":"2024-01-11","id_assign":"asd23","id_project":"2frwa","name":"asdaw","session":"XdHq2","start_date":"2024-01-09","status":"TODO"}
-[2024-01-11 11:36:57][SERVER] {"data":"","message":"Created task with id: L6XfI","success":1}
-[2024-01-11 11:36:57][CLIENT][task/get] {"id_project":"2frwa","session":"XdHq2"}
-[2024-01-11 11:36:57][SERVER] {"data":[{"comment":"awdsadsa","end_date":"2024-01-11","id":"j9btz","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdawdas","start_date":"2024-01-11","status":"TODO"},{"comment":"adwda","end_date":"2024-01-11","id":"IE00I","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"sdasdw","start_date":"2024-01-11","status":"TODO"},{"comment":"hello","end_date":"2024-01-11","id":"BgAY2","id_assign":"sd25w","id_manager":"abcde","id_project":"2frwa","name":"test task","start_date":"2024-01-10","status":"TODO"},{"comment":"","end_date":"2024-01-11","id":"LuUnU","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"test task 2","start_date":"2024-01-10","status":"TODO"},{"comment":"","end_date":"2024-01-11","id":"L6XfI","id_assign":"asd23","id_manager":"abcde","id_project":"2frwa","name":"asdaw","start_date":"2024-01-09","status":"TODO"}],"message":"Get tasks successed","success":1}
-[2024-01-11 11:36:57][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:57][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:57][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:57][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:57][CLIENT][user/id] {"id":"sd25w"}
-[2024-01-11 11:36:57][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
-[2024-01-11 11:36:57][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:57][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:36:57][CLIENT][user/id] {"id":"asd23"}
-[2024-01-11 11:36:57][SERVER] {"data":{"id":"asd23","username":"tuan"},"message":"User found","success":1}
-[2024-01-11 11:37:09][CLIENT][user/get-to-add-task] {"id_project":"L6XfI","session":"XdHq2"}
-[2024-01-11 11:37:09][SERVER] {"data":[],"message":"OK","success":1}
-[2024-01-11 11:37:15][CLIENT][logout] {"session":"XdHq2"}
-[2024-01-11 11:37:15][SERVER] {"data":"","message":"Logout successful","success":1}
-[2024-01-11 11:37:17][CLIENT][logout] {"session":"XdHq2"}
-[2024-01-11 11:37:17][SERVER] {"data":"","message":"User not found","success":0}
+[2024-01-11 13:19:07][CLIENT][member/get] {"id_project":"1wZPQ","session":"MdH96"}
+[2024-01-11 13:19:07][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
+[2024-01-11 13:19:07][CLIENT][task/get] {"id_project":"1wZPQ","session":"MdH96"}
+[2024-01-11 13:19:07][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:16][CLIENT][member/get] {"id_project":"NxP0z","session":"MdH96"}
+[2024-01-11 13:19:16][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
+[2024-01-11 13:19:16][CLIENT][task/get] {"id_project":"NxP0z","session":"MdH96"}
+[2024-01-11 13:19:16][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:22][CLIENT][member/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:22][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 13:19:22][CLIENT][task/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:22][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:30][CLIENT][user/get-to-add-member] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:30][SERVER] {"data":[{"id":"123ml","username":"thang"},{"id":"cfHJ1","username":"tuanle"}],"message":"OK","success":1}
+[2024-01-11 13:19:32][CLIENT][member/add] {"id_project":"ZymME","id_user":"123ml","session":"MdH96"}
+[2024-01-11 13:19:32][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Member added successfully","success":1}
+[2024-01-11 13:19:32][CLIENT][member/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:32][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
+[2024-01-11 13:19:37][CLIENT][member/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:37][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 13:19:37][CLIENT][task/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:37][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-11","id":"0zIxS","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-08","status":"PROCESS"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:37][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:19:37][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:19:37][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 13:19:37][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 13:19:37][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:19:37][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:19:44][CLIENT][member/get] {"id_project":"NxP0z","session":"MdH96"}
+[2024-01-11 13:19:44][SERVER] {"data":[{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
+[2024-01-11 13:19:44][CLIENT][task/get] {"id_project":"NxP0z","session":"MdH96"}
+[2024-01-11 13:19:44][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:46][CLIENT][member/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:46][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
+[2024-01-11 13:19:46][CLIENT][task/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:46][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:48][CLIENT][user/get-to-add-task] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:19:48][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 13:19:52][CLIENT][member/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:52][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 13:19:52][CLIENT][task/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:52][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-11","id":"0zIxS","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-08","status":"PROCESS"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 13:19:52][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:19:52][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:19:52][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 13:19:52][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 13:19:52][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:19:52][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:19:53][CLIENT][user/get-to-add-task] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:53][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 13:19:54][CLIENT][user/get-to-add-task] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:19:54][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"OK","success":1}
+[2024-01-11 13:20:00][CLIENT][member/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:20:00][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
+[2024-01-11 13:20:00][CLIENT][task/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:20:00][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:20:07][CLIENT][member/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:20:07][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
+[2024-01-11 13:20:07][CLIENT][task/get] {"id_project":"ZymME","session":"MdH96"}
+[2024-01-11 13:20:07][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 13:20:08][CLIENT][member/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:20:08][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 13:20:08][CLIENT][task/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:20:08][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-11","id":"0zIxS","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-08","status":"PROCESS"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 13:20:08][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:20:08][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:20:08][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 13:20:08][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 13:20:08][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:20:08][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:20:10][CLIENT][member/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:20:10][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 13:20:10][CLIENT][task/get] {"id_project":"8hUmp","session":"MdH96"}
+[2024-01-11 13:20:10][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-11","id":"0zIxS","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-08","status":"PROCESS"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 13:20:10][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:20:10][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:20:10][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 13:20:10][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 13:20:10][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 13:20:10][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 13:20:17][CLIENT][logout] {"session":"MdH96"}
+[2024-01-11 13:20:17][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 13:20:18][CLIENT][logout] {"session":"MdH96"}
+[2024-01-11 13:20:18][SERVER] {"data":"","message":"User not found","success":0}
+[2024-01-11 14:22:19][CLIENT][register] {"password":"1234","username":"test"}
+[2024-01-11 14:22:19][SERVER] {"data":"","message":"Registration successful","success":1}
+[2024-01-11 14:22:30][CLIENT][login] {"password":"1234","username":"test"}
+[2024-01-11 14:22:30][SERVER] {"data":{"id":"Oav6j","password":"1234","session":"s4lT7","username":"test"},"message":"Login successfull","success":1}
+[2024-01-11 14:22:30][CLIENT][project/all] {"session":"s4lT7"}
+[2024-01-11 14:22:30][SERVER] {"data":[],"message":"Successful","success":1}
+[2024-01-11 14:22:51][CLIENT][logout] {"session":"s4lT7"}
+[2024-01-11 14:22:51][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 14:22:58][CLIENT][login] {"password":"1234","username":"admin"}
+[2024-01-11 14:22:58][SERVER] {"data":{"id":"abcde","password":"1234","session":"kXzx5","username":"admin"},"message":"Login successfull","success":1}
+[2024-01-11 14:22:58][CLIENT][project/all] {"session":"kXzx5"}
+[2024-01-11 14:22:58][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"},{"id":"NxP0z","id_owner":"abcde","name":"ITSS"},{"id":"1wZPQ","id_owner":"abcde","name":"Dam cuoi"}],"message":"Successful","success":1}
+[2024-01-11 14:22:58][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:22:58][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:22:58][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:22:58][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:22:58][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:22:58][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:22:58][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:22:58][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:23:34][CLIENT][member/get] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:23:34][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"}],"message":"Successful","success":1}
+[2024-01-11 14:23:34][CLIENT][task/get] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:23:34][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-11","id":"0zIxS","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-08","status":"PROCESS"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 14:23:34][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 14:23:34][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 14:23:34][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 14:23:34][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 14:23:34][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 14:23:34][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 14:24:25][CLIENT][user/get-to-add-member] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:24:25][SERVER] {"data":[{"id":"cfHJ1","username":"tuanle"},{"id":"Oav6j","username":"test"}],"message":"OK","success":1}
+[2024-01-11 14:24:33][CLIENT][member/add] {"id_project":"8hUmp","id_user":"Oav6j","session":"kXzx5"}
+[2024-01-11 14:24:33][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"},{"id":"Oav6j","username":"test"}],"message":"Member added successfully","success":1}
+[2024-01-11 14:24:33][CLIENT][member/get] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:24:33][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"},{"id":"Oav6j","username":"test"}],"message":"Successful","success":1}
+[2024-01-11 14:25:02][CLIENT][user/get-to-add-task] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:25:02][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"},{"id":"Oav6j","username":"test"}],"message":"OK","success":1}
+[2024-01-11 14:26:20][CLIENT][task/update] {"comment":"Lam tot lam!","end_date":"2024-01-15","id_assign":"Oav6j","id_project":"8hUmp","id_task":"0zIxS","name":"Thuyet trinh 3","session":"kXzx5","start_date":"2024-01-11","status":"DONE"}
+[2024-01-11 14:26:20][SERVER] {"data":"","message":"Task updated successfully","success":1}
+[2024-01-11 14:26:20][CLIENT][task/get] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:26:20][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-15","id":"0zIxS","id_assign":"Oav6j","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-11","status":"DONE"},{"comment":"Good job!","end_date":"2024-01-11","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-08","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 14:26:20][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:26:20][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:26:20][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 14:26:20][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 14:26:20][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 14:26:20][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 14:27:30][CLIENT][user/get-to-add-task] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:27:30][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"},{"id":"Oav6j","username":"test"}],"message":"OK","success":1}
+[2024-01-11 14:27:38][CLIENT][task/update] {"comment":"ABC","end_date":"2024-01-15","id_assign":"123ml","id_project":"8hUmp","id_task":"9qvbZ","name":"Task new","session":"kXzx5","start_date":"2024-01-11","status":"DONE"}
+[2024-01-11 14:27:38][SERVER] {"data":"","message":"Task updated successfully","success":1}
+[2024-01-11 14:27:38][CLIENT][task/get] {"id_project":"8hUmp","session":"kXzx5"}
+[2024-01-11 14:27:38][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-15","id":"0zIxS","id_assign":"Oav6j","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-11","status":"DONE"},{"comment":"ABC","end_date":"2024-01-15","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-11","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 14:27:38][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:27:38][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:27:38][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 14:27:38][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 14:27:38][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 14:27:38][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 14:28:45][CLIENT][logout] {"session":"kXzx5"}
+[2024-01-11 14:28:45][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 14:28:51][CLIENT][login] {"password":"1234","username":"test"}
+[2024-01-11 14:28:51][SERVER] {"data":{"id":"Oav6j","password":"1234","session":"b7wEc","username":"test"},"message":"Login successfull","success":1}
+[2024-01-11 14:28:51][CLIENT][project/all] {"session":"b7wEc"}
+[2024-01-11 14:28:51][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"}],"message":"Successful","success":1}
+[2024-01-11 14:28:51][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:28:51][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:28:56][CLIENT][project/create] {"name":"DEMO","session":"b7wEc"}
+[2024-01-11 14:28:56][SERVER] {"data":"","message":"Created project with id: LBUGg","success":1}
+[2024-01-11 14:28:56][CLIENT][project/all] {"session":"b7wEc"}
+[2024-01-11 14:28:56][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"LBUGg","id_owner":"Oav6j","name":"DEMO"}],"message":"Successful","success":1}
+[2024-01-11 14:28:56][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:28:56][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:28:56][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:28:56][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:28:59][CLIENT][member/get] {"id_project":"LBUGg","session":"b7wEc"}
+[2024-01-11 14:28:59][SERVER] {"data":[{"id":"Oav6j","username":"test"}],"message":"Successful","success":1}
+[2024-01-11 14:28:59][CLIENT][task/get] {"id_project":"LBUGg","session":"b7wEc"}
+[2024-01-11 14:28:59][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 14:29:02][CLIENT][user/get-to-add-member] {"id_project":"LBUGg","session":"b7wEc"}
+[2024-01-11 14:29:02][SERVER] {"data":[{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"},{"id":"abcde","username":"admin"},{"id":"cfHJ1","username":"tuanle"}],"message":"OK","success":1}
+[2024-01-11 14:29:05][CLIENT][member/add] {"id_project":"LBUGg","id_user":"abcde","session":"b7wEc"}
+[2024-01-11 14:29:05][SERVER] {"data":[{"id":"Oav6j","username":"test"},{"id":"abcde","username":"admin"}],"message":"Member added successfully","success":1}
+[2024-01-11 14:29:05][CLIENT][member/get] {"id_project":"LBUGg","session":"b7wEc"}
+[2024-01-11 14:29:05][SERVER] {"data":[{"id":"Oav6j","username":"test"},{"id":"abcde","username":"admin"}],"message":"Successful","success":1}
+[2024-01-11 14:29:10][CLIENT][logout] {"session":"b7wEc"}
+[2024-01-11 14:29:10][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 14:29:14][CLIENT][login] {"password":"1234","username":"admin"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"abcde","password":"1234","session":"JDQlo","username":"admin"},"message":"Login successfull","success":1}
+[2024-01-11 14:29:14][CLIENT][project/all] {"session":"JDQlo"}
+[2024-01-11 14:29:14][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"},{"id":"NxP0z","id_owner":"abcde","name":"ITSS"},{"id":"1wZPQ","id_owner":"abcde","name":"Dam cuoi"},{"id":"LBUGg","id_owner":"Oav6j","name":"DEMO"}],"message":"Successful","success":1}
+[2024-01-11 14:29:14][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:14][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:14][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:14][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:14][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:29:14][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:29:31][CLIENT][logout] {"session":"JDQlo"}
+[2024-01-11 14:29:31][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 14:29:39][CLIENT][login] {"password":"1234","username":"admin"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"abcde","password":"1234","session":"QXYHo","username":"admin"},"message":"Login successfull","success":1}
+[2024-01-11 14:29:39][CLIENT][project/all] {"session":"QXYHo"}
+[2024-01-11 14:29:39][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"},{"id":"NxP0z","id_owner":"abcde","name":"ITSS"},{"id":"1wZPQ","id_owner":"abcde","name":"Dam cuoi"},{"id":"LBUGg","id_owner":"Oav6j","name":"DEMO"}],"message":"Successful","success":1}
+[2024-01-11 14:29:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:39][CLIENT][user/id] {"id":"abcde"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"abcde","username":"admin"},"message":"User found","success":1}
+[2024-01-11 14:29:39][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:29:39][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:29:47][CLIENT][member/get] {"id_project":"ZymME","session":"QXYHo"}
+[2024-01-11 14:29:47][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"sd25w","username":"quan"},{"id":"123ml","username":"thang"}],"message":"Successful","success":1}
+[2024-01-11 14:29:47][CLIENT][task/get] {"id_project":"ZymME","session":"QXYHo"}
+[2024-01-11 14:29:47][SERVER] {"data":[],"message":"Get tasks successed","success":1}
+[2024-01-11 14:29:49][CLIENT][member/get] {"id_project":"8hUmp","session":"QXYHo"}
+[2024-01-11 14:29:49][SERVER] {"data":[{"id":"abcde","username":"admin"},{"id":"asd23","username":"tuan"},{"id":"123ml","username":"thang"},{"id":"sd25w","username":"quan"},{"id":"Oav6j","username":"test"}],"message":"Successful","success":1}
+[2024-01-11 14:29:49][CLIENT][task/get] {"id_project":"8hUmp","session":"QXYHo"}
+[2024-01-11 14:29:49][SERVER] {"data":[{"comment":"Lam tot lam!","end_date":"2024-01-15","id":"0zIxS","id_assign":"Oav6j","id_manager":"abcde","id_project":"8hUmp","name":"Thuyet trinh 3","start_date":"2024-01-11","status":"DONE"},{"comment":"ABC","end_date":"2024-01-15","id":"9qvbZ","id_assign":"123ml","id_manager":"abcde","id_project":"8hUmp","name":"Task new","start_date":"2024-01-11","status":"DONE"},{"comment":"Di an dam cuoi","end_date":"2024-01-13","id":"b9TXc","id_assign":"sd25w","id_manager":"abcde","id_project":"8hUmp","name":"Dam cuoi","start_date":"2024-01-11","status":"TODO"}],"message":"Get tasks successed","success":1}
+[2024-01-11 14:29:49][CLIENT][user/id] {"id":"Oav6j"}
+[2024-01-11 14:29:49][SERVER] {"data":{"id":"Oav6j","username":"test"},"message":"User found","success":1}
+[2024-01-11 14:29:49][CLIENT][user/id] {"id":"123ml"}
+[2024-01-11 14:29:49][SERVER] {"data":{"id":"123ml","username":"thang"},"message":"User found","success":1}
+[2024-01-11 14:29:49][CLIENT][user/id] {"id":"sd25w"}
+[2024-01-11 14:29:49][SERVER] {"data":{"id":"sd25w","username":"quan"},"message":"User found","success":1}
+[2024-01-11 14:31:06][CLIENT][logout] {"session":"QXYHo"}
+[2024-01-11 14:31:06][SERVER] {"data":"","message":"Logout successful","success":1}
+[2024-01-11 14:32:31][CLIENT][login] {"password":"1234","username":"tuan"}
+[2024-01-11 14:32:31][SERVER] {"data":{"id":"asd23","password":"1234","session":"Xo5Ro","username":"tuan"},"message":"Login successfull","success":1}
+[2024-01-11 14:32:31][CLIENT][project/all] {"session":"Xo5Ro"}
+[2024-01-11 14:32:31][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"}],"message":"Successful","success":1}
+[2024-01-11 14:32:42][CLIENT][login] {"password":"1234","username":"thang"}
+[2024-01-11 14:32:42][SERVER] {"data":{"id":"123ml","password":"1234","session":"o5vYl","username":"thang"},"message":"Login successfull","success":1}
+[2024-01-11 14:32:42][CLIENT][project/all] {"session":"o5vYl"}
+[2024-01-11 14:32:42][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"}],"message":"Successful","success":1}
+[2024-01-11 14:32:45][CLIENT][chat/get] {"id_project":"8hUmp","session":"o5vYl"}
+[2024-01-11 14:32:45][SERVER] {"data":null,"message":"Get message","success":1}
+[2024-01-11 14:32:46][CLIENT][chat/get] {"id_project":"8hUmp","session":"Xo5Ro"}
+[2024-01-11 14:32:46][SERVER] {"data":null,"message":"Get message","success":1}
+[2024-01-11 14:33:07][CLIENT][login] {"password":"1234","username":"thang"}
+[2024-01-11 14:33:07][SERVER] {"data":{"id":"123ml","password":"1234","session":"W36wV","username":"thang"},"message":"Login successfull","success":1}
+[2024-01-11 14:33:07][CLIENT][project/all] {"session":"W36wV"}
+[2024-01-11 14:33:07][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"}],"message":"Successful","success":1}
+[2024-01-11 14:33:08][CLIENT][chat/get] {"id_project":"8hUmp","session":"W36wV"}
+[2024-01-11 14:33:08][SERVER] {"data":[{"content":"hello","id":"l4X78","id_project":"8hUmp","id_user":"asd23","time":"2024-01-11 14:32:51","username":"tuan"},{"content":"hi","id":"3W9sm","id_project":"8hUmp","id_user":"123ml","time":"2024-01-11 14:32:55","username":"thang"}],"message":"Get message","success":1}
+[2024-01-11 14:33:15][CLIENT][login] {"password":"1234","username":"tuan"}
+[2024-01-11 14:33:15][SERVER] {"data":{"id":"asd23","password":"1234","session":"FehU2","username":"tuan"},"message":"Login successfull","success":1}
+[2024-01-11 14:33:15][CLIENT][project/all] {"session":"FehU2"}
+[2024-01-11 14:33:15][SERVER] {"data":[{"id":"8hUmp","id_owner":"abcde","name":"LTM"},{"id":"ZymME","id_owner":"abcde","name":"CNWEB"}],"message":"Successful","success":1}
+[2024-01-11 14:33:16][CLIENT][chat/get] {"id_project":"8hUmp","session":"FehU2"}
+[2024-01-11 14:33:16][SERVER] {"data":[{"content":"hello","id":"l4X78","id_project":"8hUmp","id_user":"asd23","time":"2024-01-11 14:32:51","username":"tuan"},{"content":"hi","id":"3W9sm","id_project":"8hUmp","id_user":"123ml","time":"2024-01-11 14:32:55","username":"thang"}],"message":"Get message","success":1}

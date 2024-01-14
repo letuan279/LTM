@@ -50,12 +50,18 @@ struct Task {
     string end_date;
 };
 
+struct MemberAdd {
+    string id;
+    string username;
+};
+
 // Data
 Account acc = {"", "", "", ""};
 std::vector<Project> projects;
 Project currProject;
 std::vector<Task> currTask;
 std::vector<Account> currMember;
+std::vector<MemberAdd> allAssignMember;
 
 void notify(const int& success, const string& content) {
     string status;
@@ -136,6 +142,7 @@ void getAllProjectList(const QWidget& screen) {
 }
 
 void getMemberList(const QWidget* screen) {
+    currMember.clear();
     // Get member list
     std::string member_res = performGetMemberList(acc.session, currProject.id);
     QString memberJsonString = QString::fromStdString(member_res);
@@ -177,6 +184,7 @@ void getMemberList(const QWidget* screen) {
 }
 
 void getTaskList(const QWidget* screen) {
+    currTask.clear();
     // Get task list
     std::string task_res = performGetTaskList(acc.session, currProject.id);
     QString taskJsonString = QString::fromStdString(task_res);
@@ -448,13 +456,15 @@ int main(int argc, char *argv[])
                 notify(success, message.toStdString());
             } else {
                 QJsonArray userArr = jsonObj["data"].toArray();
+                QJsonArray newMembers;
                 qDebug() << "Total: " << userArr.size();
                 for (int i = 0; i < userArr.size(); i++) {
                     QJsonObject user = userArr[i].toObject();
                     qDebug() << "Adding " << user["username"].toString().toStdString();
-                    allMembers.insert(i, user);
-                    memberCombobox->addItem(user["username"].toString());
+                    newMembers.insert(i, user);
+                    memberCombobox->addItem(user["username"].toString()); 
                 }
+                allMembers.swap(newMembers);
             }
         }
     });
@@ -512,12 +522,14 @@ int main(int argc, char *argv[])
             } else {
                 QJsonArray userArr = jsonObj["data"].toArray();
                 qDebug() << "Total: " << userArr.size();
-                assignCombobox->addItem("");
+                QJsonArray newAssign;
                 for (int i = 0; i < userArr.size(); i++) {
                     QJsonObject user = userArr[i].toObject();
-                    allAssign.insert(i+1, user);
+                    qDebug() << "Add: " << user["username"];
+                    newAssign.insert(i, user);
                     assignCombobox->addItem(user["username"].toString());
                 }
+                allAssign.swap(newAssign);
             }
         }
 
@@ -543,7 +555,7 @@ int main(int argc, char *argv[])
             isEdit = true;
             editTaskId = it->id;
 
-            std::string user_res = performGetUserToAddTask(acc.session, it->id);
+            std::string user_res = performGetUserToAddTask(acc.session, currProject.id);
             QString jsonString = QString::fromStdString(user_res);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
             if (!jsonDoc.isNull() && jsonDoc.isObject()) {
@@ -555,10 +567,9 @@ int main(int argc, char *argv[])
                 } else {
                     QJsonArray userArr = jsonObj["data"].toArray();
                     qDebug() << "Total: " << userArr.size();
-                    assignCombobox->addItem("");
                     for (int i = 0; i < userArr.size(); i++) {
                         QJsonObject user = userArr[i].toObject();
-                        allAssign.insert(i+1, user);
+                        allAssign.insert(i, user);
                         assignCombobox->addItem(user["username"].toString());
                     }
                 }
